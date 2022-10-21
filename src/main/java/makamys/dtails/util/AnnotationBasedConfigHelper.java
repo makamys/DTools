@@ -9,6 +9,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.util.Arrays;
 import java.util.Map;
+import java.util.function.BiConsumer;
 
 import org.apache.commons.lang3.EnumUtils;
 import org.apache.logging.log4j.Logger;
@@ -18,9 +19,30 @@ import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.common.config.Property;
 import net.minecraftforge.common.config.Property.Type;
 
-public class AnnotationBasedConfig {
+public class AnnotationBasedConfigHelper {
     
-    public static boolean loadFields(Configuration config, Class<?> theConfigClass, Logger LOGGER) {
+    private Logger logger;
+    private Class<?> theConfigClass;
+    
+    public AnnotationBasedConfigHelper(Class<?> theConfigClass, Logger logger) {
+        this.logger = logger;
+        this.theConfigClass = theConfigClass;
+    }
+    
+    public boolean loadFields(Configuration config) {
+        return iterateOverConfigAnd(config, this::setConfigClassField);
+    }
+    
+    private void setConfigClassField(Field field, Object newValue) {
+        try {
+            field.set(null, newValue);
+        } catch (Exception e) {
+            logger.error("Failed to set value of field " + field.getName());
+            e.printStackTrace();
+        }
+    }
+    
+    private boolean iterateOverConfigAnd(Configuration config, BiConsumer<Field, Object> callback) {
         boolean needReload = false;
         
         for(Field field : theConfigClass.getFields()) {
@@ -56,7 +78,7 @@ public class AnnotationBasedConfig {
             try {
                 currentValue = field.get(null);
             } catch (Exception e) {
-                LOGGER.error("Failed to get value of field " + field.getName());
+                logger.error("Failed to get value of field " + field.getName());
                 e.printStackTrace();
                 continue;
             }
@@ -109,15 +131,59 @@ public class AnnotationBasedConfig {
                 needReload = true;
             }
             
-            try {
-                field.set(null, newValue);
-            } catch (Exception e) {
-                LOGGER.error("Failed to set value of field " + field.getName());
-                e.printStackTrace();
-            }
+            callback.accept(field, newValue);
         }
         
         return needReload;
+    }
+    
+    public void saveFields(Configuration config) {
+        iterateOverConfigAnd(config, (field, newValue) -> {
+            try {
+                Object fieldValue = field.get(null);
+                if(!fieldValue.equals(newValue)) {
+                    for(String catName : config.getCategoryNames()) {
+                        ConfigCategory cat = config.getCategory(catName);
+                        Property prop = cat.get(field.getName());
+                        if(prop != null) {
+                            try {
+                                setProperty(prop, fieldValue);
+                            } catch(Exception e) {
+                                logger.error("Failed to save field " + field.getName());
+                                e.printStackTrace();
+                            }
+                            return;
+                        }   
+                    }
+                    logger.error("Couldn't find property named " + field.getName() + ", can't save new value");
+                }
+            } catch(Exception e) {
+                e.printStackTrace();
+            }
+        });
+        
+        if(config.hasChanged()) {
+            config.save();
+        }
+    }
+    
+    private static void setProperty(Property prop, Object newValue) {
+        switch(prop.getType()) {
+        case BOOLEAN:
+            prop.set((Boolean)newValue);
+            break;
+        case DOUBLE:
+            prop.set((Double)newValue);
+            break;
+        case INTEGER:
+            prop.set((Integer)newValue);
+            break;
+        case STRING:
+            prop.set((String)newValue);
+            break;
+        default:
+            throw new UnsupportedOperationException();
+        }
     }
     
     @Retention(RetentionPolicy.RUNTIME)

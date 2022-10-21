@@ -2,9 +2,13 @@ package makamys.dtails;
 
 import static makamys.dtails.DTails.LOGGER;
 import static makamys.dtails.DTails.MODID;
-import static makamys.dtails.util.AnnotationBasedConfig.*;
+import static makamys.dtails.util.AnnotationBasedConfigHelper.*;
 
 import java.io.File;
+
+import org.apache.logging.log4j.Logger;
+
+import makamys.dtails.util.AnnotationBasedConfigHelper;
 import makamys.dtails.util.ConfigDumper;
 import net.minecraft.launchwrapper.Launch;
 import net.minecraftforge.common.config.Configuration;
@@ -38,16 +42,20 @@ public class Config {
     public static boolean crasher;
     @ConfigBoolean(cat="Debug", def=false, com="Render world in wireframe mode. Toggle using /dtails wireframe")
     public static boolean wireframe;
+    @ConfigBoolean(cat="Debug", def=false, com="Enable wireframe at startup")
+    public static boolean wireframeStartEnabled;
     
     private static Configuration config;
     private static File configFile = new File(Launch.minecraftHome, "config/" + MODID + ".cfg");
+    
+    private static AnnotationBasedConfigHelper configHelper = new AnnotationBasedConfigHelper(Config.class, LOGGER);
 
     
     public static void reload() {
         config = new Configuration(configFile);
         
         config.load();
-        loadFields(config, Config.class, LOGGER);
+        configHelper.loadFields(config);
         
         config.addCustomCategoryComment("Tweaks", "In addition to these settings, there are some tweaks that are activated via JVM flags:\n" +
                 "* -Ddtails.launchWorld=WORLD : Automatically loads the world with the folder name WORLD once the main menu is reached. WORLD can be left blank, in this case the most recently played world will be loaded. Hold down shift when the main menu appears to cancel the automatic loading.\n" +
@@ -61,6 +69,13 @@ public class Config {
         if(config.hasChanged()) {
             config.save();
         }
+    }
+    
+    public static void save() {
+        if(config == null) {
+            LOGGER.error("Failed to save config because it hasn't been loaded yet");
+        }
+        configHelper.saveFields(config);
     }
     
 }

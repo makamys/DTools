@@ -1,5 +1,6 @@
 package makamys.dtails.diagnostics;
 
+import makamys.dtails.Config;
 import makamys.dtails.IModEventListener;
 import makamys.dtails.command.DTailsCommand;
 import makamys.dtails.command.ISubCommand;
@@ -9,8 +10,6 @@ public class Wireframe implements IModEventListener {
 
     public static IModEventListener instance;
     
-    private static boolean enabled;
-    
     public Wireframe() {
         DTailsCommand.registerSubCommand("wireframe", new WireframeSubCommand());
     }
@@ -19,13 +18,14 @@ public class Wireframe implements IModEventListener {
         
         @Override
         public void processCommand(ICommandSender sender, String[] args) {
-            enabled = !enabled;
+            Config.wireframeStartEnabled = !Config.wireframeStartEnabled;
+            Config.save();
         }
         
     }
 
     public static boolean isEnabled() {
-        return enabled;
+        return Config.wireframeStartEnabled;
     }
     
 }
