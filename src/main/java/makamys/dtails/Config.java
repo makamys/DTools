@@ -34,9 +34,9 @@ public class Config {
     @ConfigInt(cat="Automation", def=20, min=0, max=Integer.MAX_VALUE, com="How many ticks to wait before pausing an auto-loaded world.")
     public static int autoLoadPauseWaitLength;
     
-    @ConfigBoolean(cat="Testing", def=false, com="Enables debug feature that crashes the game when pressing certain key combinations.")
+    @ConfigBoolean(cat="Debug", def=false, com="Enables debug feature that crashes the game when pressing certain key combinations.")
     public static boolean crasher;
-    @ConfigBoolean(cat="Testing", def=false, com="Render world in wireframe mode. Toggle using /dtails wireframe")
+    @ConfigBoolean(cat="Debug", def=false, com="Render world in wireframe mode. Toggle using /dtails wireframe")
     public static boolean wireframe;
     
     private static Configuration config;
