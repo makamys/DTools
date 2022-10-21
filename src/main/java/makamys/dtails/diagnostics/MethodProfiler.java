@@ -42,7 +42,7 @@ public class MethodProfiler {
         
         DTailsCommand.registerSubCommand("methodprofiler", new MethodProfilerSubCommand());
         
-        for(String methodStr : Config.profilerMethods.split(",")) {
+        for(String methodStr : Config.methodProfilerMethods.split(",")) {
             int lastDot = methodStr.lastIndexOf('.');
             String clazz = methodStr.substring(0, lastDot);
             String method = methodStr.substring(lastDot + 1);
@@ -152,7 +152,7 @@ public class MethodProfiler {
     }
     
     public static boolean isActive() {
-        return !Config.profilerMethods.isEmpty();
+        return !Config.methodProfilerMethods.isEmpty();
     }
     
     public static class MethodInstrumentationData {
