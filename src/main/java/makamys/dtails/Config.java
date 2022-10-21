@@ -36,7 +36,7 @@ public class Config {
     
     @ConfigBoolean(cat="Testing", def=false, com="Enables debug feature that crashes the game when pressing certain key combinations.")
     public static boolean crasher;
-    @ConfigBoolean(cat="Testing", def=false, com="Render world in wireframe mode. Tip: If this is enabled when the game is started, you will be able to toggle it without restarting the game, only the world needs to be reloaded.")
+    @ConfigBoolean(cat="Testing", def=false, com="Render world in wireframe mode. Toggle using /dtails wireframe")
     public static boolean wireframe;
     
     private static Configuration config;

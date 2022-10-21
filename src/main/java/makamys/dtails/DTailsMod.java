@@ -22,6 +22,7 @@ import makamys.dtails.diagnostics.FrameProfiler;
 import makamys.dtails.diagnostics.MethodProfiler;
 import makamys.dtails.diagnostics.ServerRunTimePrinter;
 import makamys.dtails.diagnostics.WAIAA;
+import makamys.dtails.diagnostics.Wireframe;
 import makamys.dtails.tweak.automation.AutoWorldLoad;
 import makamys.dtails.tweak.crashhandler.Crasher;
 import makamys.dtails.util.KeyboardUtil;
@@ -55,6 +56,9 @@ public class DTailsMod
         registerListener(FrameProfiler.instance = new FrameProfiler());
         if(JVMArgs.LAUNCH_WORLD != null) {
         	registerListener(AutoWorldLoad.instance = new AutoWorldLoad());
+        }
+        if(Config.wireframe) {
+            registerListener(Wireframe.instance = new Wireframe());
         }
     }
     
