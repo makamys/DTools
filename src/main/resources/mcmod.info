@@ -1,14 +1,13 @@
 [
 {
-  "modid": "${modid}",
-  "name": "Example Mod",
-  "description": "Example placeholder mod.",
+  "modid": "dtails",
+  "name": "DTails",
+  "description": "A mod containing various utilities for debugging, benchmarking and testing.",
   "version": "${version}",
   "mcversion": "${minecraft_version}",
   "url": "",
   "updateUrl": "",
-  "authorList": ["ExampleDude"],
-  "credits": "The Forge and FML guys, for making this example",
+  "authorList": ["makamys"],
   "logoFile": "",
   "screenshots": [],
   "dependencies": []

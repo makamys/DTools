@@ -7,5 +7,6 @@
     "mixins": [
 
     ],
-    "plugin": "makamys.dtails.MixinConfigPlugin"
+    "plugin": "makamys.dtails.MixinConfigPlugin",
+    "target": "@env(INIT)"
 }
