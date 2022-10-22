@@ -6,7 +6,7 @@ jar {
             // If these two are not set, Forge will not detect the mod, it will only run the mixins
             'FMLCorePluginContainsFMLMod': 'true',
             'ForceLoadAsMod': 'true',
-			'FMLCorePlugin': 'makamys.dtails.CoreTweaksPlugin'
+			'FMLCorePlugin': 'makamys.dtails.DTailsPlugin'
         )
     }
 	
