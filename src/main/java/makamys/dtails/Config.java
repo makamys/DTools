@@ -30,6 +30,8 @@ public class Config {
     public static boolean forgeBarProfiler;
     @ConfigBoolean(cat="Profiling", def=false, com="Prints server run time.")
     public static boolean serverRunTimePrinter;
+    @ConfigBoolean(cat="Profiling", def=false, com="Show extra RAM info in F3 overlay.")
+    public static boolean extraRamInfo;
     
     @ConfigBoolean(cat="Automation", def=true, com="Pause some ticks after auto-loaded world is loaded.\\nDelaying the pausing can be useful because some initialization like chunk updates won't happen while the game is paused.")
     public static boolean autoLoadPauseOnWorldEntry;

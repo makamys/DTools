@@ -19,6 +19,7 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent.ClientTickEvent;
 import cpw.mods.fml.relauncher.Side;
 import makamys.dtails.command.DTailsCommand;
+import makamys.dtails.diagnostics.ExtraRAMInfo;
 import makamys.dtails.diagnostics.FrameProfiler;
 import makamys.dtails.diagnostics.MethodProfiler;
 import makamys.dtails.diagnostics.ServerRunTimePrinter;
@@ -61,6 +62,9 @@ public class DTailsMod
             }
             if(Config.wireframe) {
                 registerListener(Wireframe.instance = new Wireframe());
+            }
+            if(Config.extraRamInfo) {
+                registerListener(ExtraRAMInfo.instance = new ExtraRAMInfo());
             }
         }
     }
