@@ -17,6 +17,7 @@ import cpw.mods.fml.common.event.FMLServerStoppedEvent;
 import cpw.mods.fml.common.event.FMLServerStoppingEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent.ClientTickEvent;
+import cpw.mods.fml.relauncher.Side;
 import makamys.dtails.command.DTailsCommand;
 import makamys.dtails.diagnostics.FrameProfiler;
 import makamys.dtails.diagnostics.MethodProfiler;
@@ -53,12 +54,14 @@ public class DTailsMod
         if(Config.serverRunTimePrinter) {
             registerListener(ServerRunTimePrinter.instance = new ServerRunTimePrinter());
         }
-        registerListener(FrameProfiler.instance = new FrameProfiler());
-        if(JVMArgs.LAUNCH_WORLD != null) {
-        	registerListener(AutoWorldLoad.instance = new AutoWorldLoad());
-        }
-        if(Config.wireframe) {
-            registerListener(Wireframe.instance = new Wireframe());
+        if(event.getSide() == Side.CLIENT) {
+            registerListener(FrameProfiler.instance = new FrameProfiler());
+            if(JVMArgs.LAUNCH_WORLD != null) {
+            	registerListener(AutoWorldLoad.instance = new AutoWorldLoad());
+            }
+            if(Config.wireframe) {
+                registerListener(Wireframe.instance = new Wireframe());
+            }
         }
     }
     
