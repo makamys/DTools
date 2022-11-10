@@ -18,6 +18,7 @@ import cpw.mods.fml.common.event.FMLServerStoppingEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent.ClientTickEvent;
 import cpw.mods.fml.relauncher.Side;
+import makamys.dtails.automation.InputFreezer;
 import makamys.dtails.command.DTailsCommand;
 import makamys.dtails.diagnostics.ExtraRAMInfo;
 import makamys.dtails.diagnostics.FrameProfiler;
@@ -69,6 +70,9 @@ public class DTailsMod
             }
             if(Config.positionDeltaPrint) {
                 registerListener(PositionDeltaPrinter.instance = new PositionDeltaPrinter());
+            }
+            if(Config.freezeInputKey) {
+                registerListener(InputFreezer.instance = new InputFreezer());
             }
         }
     }

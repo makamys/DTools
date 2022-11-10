@@ -39,6 +39,8 @@ public class Config {
     public static boolean autoLoadDingOnWorldEntry;
     @ConfigInt(cat="Automation", def=20, min=0, max=Integer.MAX_VALUE, com="How many ticks to wait before pausing an auto-loaded world.")
     public static int autoLoadPauseWaitLength;
+    @ConfigBoolean(cat="Automation", def=false, com="Press F to freeze input.\n(Cheat feature)")
+    public static boolean freezeInputKey;
     
     @ConfigBoolean(cat="Debug", def=false, com="Enables debug feature that crashes the game when pressing certain key combinations.")
     public static boolean crasher;

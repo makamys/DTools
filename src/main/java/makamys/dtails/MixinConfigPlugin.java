@@ -60,6 +60,10 @@ public class MixinConfigPlugin implements IMixinConfigPlugin {
             
             if(Config.frameProfilerHooks) mixins.addAll(Arrays.asList("diagnostics.frameprofiler.MixinEntityRenderer",
                                                                         "diagnostics.frameprofiler.MixinMinecraft"));
+            if(Config.freezeInputKey) mixins.addAll(Arrays.asList(
+                    "automation.freezeinput.MixinMinecraft",
+                    "automation.freezeinput.MixinMouseHelper"
+            )); 
         }
         return mixins;
     }
