@@ -42,7 +42,7 @@ public class Config {
     
     @ConfigBoolean(cat="Debug", def=false, com="Enables debug feature that crashes the game when pressing certain key combinations.")
     public static boolean crasher;
-    @ConfigBoolean(cat="Debug", def=false, com="Render world in wireframe mode. Toggle using /dtails wireframe")
+    @ConfigBoolean(cat="Debug", def=false, com="Render world in wireframe mode. Toggle using /dtails wireframe.\n(Cheat feature)")
     public static boolean wireframe;
     @ConfigBoolean(cat="Debug", def=false, com="Enable wireframe at startup")
     public static boolean wireframeStartEnabled;
@@ -60,6 +60,8 @@ public class Config {
         
         config.load();
         configHelper.loadFields(config);
+        
+        config.addCustomCategoryComment("General", "Features marked as (Cheat feature) are only available in creative mode, or in a dev environment.");
         
         config.addCustomCategoryComment("Automation", "In addition to these settings, there are some tweaks that are activated via JVM flags:\n" +
                 "* -Ddtails.launchWorld=WORLD : Automatically loads the world with the folder name WORLD once the main menu is reached. WORLD can be left blank, in this case the most recently played world will be loaded. Hold down shift when the main menu appears to cancel the automatic loading.\n" +
