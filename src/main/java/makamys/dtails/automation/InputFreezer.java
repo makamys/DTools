@@ -58,4 +58,12 @@ public class InputFreezer implements IModEventListener {
         return CheatHelper.canCheat();
     }
     
+    public static boolean isFrozen() {
+        return instance.frozen;
+    }
+    
+    public static void setFrozen(boolean frozen) {
+        instance.frozen = frozen;
+    }
+    
 }
