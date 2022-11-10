@@ -46,6 +46,8 @@ public class Config {
     public static boolean wireframe;
     @ConfigBoolean(cat="Debug", def=false, com="Enable wireframe at startup")
     public static boolean wireframeStartEnabled;
+    @ConfigBoolean(cat="Debug", def=false, com="Print change in XYZ coordinates every tick")
+    public static boolean positionDeltaPrint;
     
     private static Configuration config;
     private static File configFile = new File(Launch.minecraftHome, "config/" + MODID + ".cfg");

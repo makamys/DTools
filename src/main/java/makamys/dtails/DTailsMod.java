@@ -22,6 +22,7 @@ import makamys.dtails.command.DTailsCommand;
 import makamys.dtails.diagnostics.ExtraRAMInfo;
 import makamys.dtails.diagnostics.FrameProfiler;
 import makamys.dtails.diagnostics.MethodProfiler;
+import makamys.dtails.diagnostics.PositionDeltaPrinter;
 import makamys.dtails.diagnostics.ServerRunTimePrinter;
 import makamys.dtails.diagnostics.WAIAA;
 import makamys.dtails.diagnostics.Wireframe;
@@ -65,6 +66,9 @@ public class DTailsMod
             }
             if(Config.extraRamInfo) {
                 registerListener(ExtraRAMInfo.instance = new ExtraRAMInfo());
+            }
+            if(Config.positionDeltaPrint) {
+                registerListener(PositionDeltaPrinter.instance = new PositionDeltaPrinter());
             }
         }
     }
