@@ -6,8 +6,6 @@ import static makamys.dtools.util.AnnotationBasedConfigHelper.*;
 
 import java.io.File;
 
-import org.apache.logging.log4j.Logger;
-
 import makamys.dtools.util.AnnotationBasedConfigHelper;
 import makamys.dtools.util.ConfigDumper;
 import net.minecraft.launchwrapper.Launch;
