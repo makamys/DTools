@@ -1,12 +1,12 @@
 jar {
     manifest {
         attributes (
-            'MixinConfigs': 'dtails.mixin.json,dtails-init.mixin.json,dtails-preinit.mixin.json',
+            'MixinConfigs': 'dtools.mixin.json,dtools-init.mixin.json,dtools-preinit.mixin.json',
             
             // If these two are not set, Forge will not detect the mod, it will only run the mixins
             'FMLCorePluginContainsFMLMod': 'true',
             'ForceLoadAsMod': 'true',
-			'FMLCorePlugin': 'makamys.dtails.DTailsPlugin'
+			'FMLCorePlugin': 'makamys.dtools.DToolsPlugin'
         )
     }
 	

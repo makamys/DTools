@@ -1,0 +1,89 @@
+package makamys.dtools;
+
+import static makamys.dtools.DTools.LOGGER;
+import static makamys.dtools.DTools.MODID;
+import static makamys.dtools.util.AnnotationBasedConfigHelper.*;
+
+import java.io.File;
+
+import org.apache.logging.log4j.Logger;
+
+import makamys.dtools.util.AnnotationBasedConfigHelper;
+import makamys.dtools.util.ConfigDumper;
+import net.minecraft.launchwrapper.Launch;
+import net.minecraftforge.common.config.Configuration;
+
+public class Config {
+    
+    @ConfigBoolean(cat="_General", def=true, com="Enables the /dtools command, used to access various diagnostics. Invoke it in-game for additional information.")
+    public static boolean dtoolsCommand;
+    
+    @ConfigBoolean(cat="Profiling", def=false, com="Automatically start frame profiler as soon as the game starts.")
+    public static boolean frameProfilerStartEnabled;
+    @ConfigBoolean(cat="Profiling", def=false, com="Insert hooks that lets the frame profiler profile various parts of frame rendering. If this is disabled, the frame profiler will only be able to show very limited information.")
+    public static boolean frameProfilerHooks;
+    @ConfigBoolean(cat="Profiling", def=false, com="Print render tick times to log periodically.")
+    public static boolean frameProfilerPrint;
+    @ConfigString(cat="Profiling", def="", com="Comma-separated list of methods to profile. The results will be written to ./dtools/out/profiler-<timestamp>.csv. Currently only the call count is measured. Method names have the syntax of `<canonical class name>.<method name>`, like `some.package.SomeClass.method`.")
+    public static String methodProfilerMethods;
+    @ConfigBoolean(cat="Profiling", def=false, com="Creates a report of how long each step of startup loading took in ./dtools/out/fml_bar_profiler.csv.")
+    public static boolean forgeBarProfiler;
+    @ConfigBoolean(cat="Profiling", def=false, com="Prints server run time.")
+    public static boolean serverRunTimePrinter;
+    @ConfigBoolean(cat="Profiling", def=false, com="Show extra RAM info in F3 overlay.")
+    public static boolean extraRamInfo;
+    
+    @ConfigBoolean(cat="Automation", def=true, com="Pause some ticks after auto-loaded world is loaded.\\nDelaying the pausing can be useful because some initialization like chunk updates won't happen while the game is paused.")
+    public static boolean autoLoadPauseOnWorldEntry;
+    @ConfigBoolean(cat="Automation", def=true, com="Ding once auto-loaded world is loaded.")
+    public static boolean autoLoadDingOnWorldEntry;
+    @ConfigInt(cat="Automation", def=20, min=0, max=Integer.MAX_VALUE, com="How many ticks to wait before pausing an auto-loaded world.")
+    public static int autoLoadPauseWaitLength;
+    @ConfigBoolean(cat="Automation", def=false, com="Press F to freeze input.\n(Cheat feature)")
+    public static boolean freezeInputKey;
+    
+    @ConfigBoolean(cat="Debug", def=false, com="Enables debug feature that crashes the game when pressing certain key combinations.")
+    public static boolean crasher;
+    @ConfigBoolean(cat="Debug", def=false, com="Render world in wireframe mode. Toggle using /dtools wireframe.\n(Cheat feature)")
+    public static boolean wireframe;
+    @ConfigBoolean(cat="Debug", def=false, com="Enable wireframe at startup")
+    public static boolean wireframeStartEnabled;
+    @ConfigBoolean(cat="Debug", def=false, com="Print change in XYZ coordinates every tick")
+    public static boolean positionDeltaPrint;
+    
+    private static Configuration config;
+    private static File configFile = new File(Launch.minecraftHome, "config/" + MODID + ".cfg");
+    
+    private static AnnotationBasedConfigHelper configHelper = new AnnotationBasedConfigHelper(Config.class, LOGGER);
+
+    
+    public static void reload() {
+        config = new Configuration(configFile);
+        
+        config.load();
+        configHelper.loadFields(config);
+        
+        config.addCustomCategoryComment("General", "Features marked as (Cheat feature) are only available in creative mode, or in a dev environment.");
+        
+        config.addCustomCategoryComment("Automation", "In addition to these settings, there are some tweaks that are activated via JVM flags:\n" +
+                "* -Ddtools.launchWorld=WORLD : Automatically loads the world with the folder name WORLD once the main menu is reached. WORLD can be left blank, in this case the most recently played world will be loaded. Hold down shift when the main menu appears to cancel the automatic loading.\n" +
+                "* -Ddtools.launchMinimized : Launch Minecraft minimized. Only implemented on Windows at the moment.\n" +
+                "* -Ddtools.launchOnDesktop=NUMBER : Launch Minecraft on the virtual desktop with ordinal NUMBER. Only implemented on Linux at the moment. xprop has to be installed for it to work. Only tested on Openbox.");
+        
+        if(ConfigDumper.ENABLED) {
+            ConfigDumper.dumpConfig(config);
+        }
+        
+        if(config.hasChanged()) {
+            config.save();
+        }
+    }
+    
+    public static void save() {
+        if(config == null) {
+            LOGGER.error("Failed to save config because it hasn't been loaded yet");
+        }
+        configHelper.saveFields(config);
+    }
+    
+}

@@ -1,7 +1,7 @@
 [
 {
-  "modid": "dtails",
-  "name": "D-Tails",
+  "modid": "dtools",
+  "name": "DTools",
   "description": "A mod containing various utilities for debugging, benchmarking and testing.",
   "version": "${version}",
   "mcversion": "${minecraft_version}",
