@@ -15,7 +15,7 @@ import net.minecraftforge.common.config.Configuration;
 
 public class Config {
     
-    @ConfigBoolean(cat="_General", def=true, com="Enables the /dtools command, used to access various diagnostics. Invoke it in-game for additional information.")
+    @ConfigBoolean(cat="_General", def=true, com="Enables the /dtools command, used to access various features. Invoke it in-game for additional information.")
     public static boolean dtoolsCommand;
     
     @ConfigBoolean(cat="Profiling", def=false, com="Automatically start frame profiler as soon as the game starts.")
