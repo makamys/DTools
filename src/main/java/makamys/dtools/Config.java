@@ -63,7 +63,7 @@ public class Config {
         config.load();
         configHelper.loadFields(config);
         
-        config.addCustomCategoryComment("General", "Features marked as (Cheat feature) are only available in creative mode, or in a dev environment.");
+        config.addCustomCategoryComment("_General", "Features marked as (Cheat feature) are only available in creative mode, or in a dev environment.");
         
         config.addCustomCategoryComment("Automation", "In addition to these settings, there are some tweaks that are activated via JVM flags:\n" +
                 "* -Ddtools.launchWorld=WORLD : Automatically loads the world with the folder name WORLD once the main menu is reached. WORLD can be left blank, in this case the most recently played world will be loaded. Hold down shift when the main menu appears to cancel the automatic loading.\n" +
