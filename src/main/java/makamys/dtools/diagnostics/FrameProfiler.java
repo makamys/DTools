@@ -235,6 +235,9 @@ public class FrameProfiler implements IModEventListener {
                         addColoredChatMessage(sender, "Creates a report about the timing of various parts of the rendering process.", HELP_COLOR);
                         addColoredChatMessage(sender, "The report will be written to " + HELP_EMPHASIS_COLOR + "./dtools/out/frameprofiler.csv" + HELP_COLOR + ".", HELP_COLOR);
                         addColoredChatMessage(sender, "A useful script for parsing the results of the report can be found at " + HELP_EMPHASIS_COLOR + "https://github.com/makamys/DTools/tree/master/scripts", HELP_COLOR, (msg) -> msg.getChatStyle().setChatClickEvent(new ClickEvent(Action.OPEN_URL, "https://github.com/makamys/DTools/tree/master/scripts")));
+                        if(!Config.frameProfilerHooks) {
+                            addColoredChatMessage(sender, "`frameProfilerHooks` is not enabled in the config, results will be incomplete.", HELP_WARNING_COLOR);
+                        }
                         return;
                     }
                 }

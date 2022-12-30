@@ -14,6 +14,7 @@ public class DToolsCommand extends CommandBase {
     
     public static final EnumChatFormatting HELP_COLOR = EnumChatFormatting.BLUE;
     public static final EnumChatFormatting HELP_USAGE_COLOR = EnumChatFormatting.YELLOW;
+    public static final EnumChatFormatting HELP_WARNING_COLOR = EnumChatFormatting.YELLOW;
     public static final EnumChatFormatting HELP_EMPHASIS_COLOR = EnumChatFormatting.DARK_AQUA;
     
     private static Map<String, ISubCommand> subCommands = new HashMap<>();
