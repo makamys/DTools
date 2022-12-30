@@ -10,6 +10,7 @@ The mod was formerly part of [CoreTweaks](https://github.com/makamys/CoreTweaks)
 * Display RAM allocation rate
 * Wireframe rendering
 * Automatically load a world after the game starts 
+* Command to print info about block that is currently being aimed at
 * See the [Config](https://github.com/makamys/DTools/wiki/Config) page on the wiki for the full list.
 
 ## Usage
