@@ -14,6 +14,7 @@ import codechicken.nei.ItemPanels;
 import codechicken.nei.guihook.GuiContainerManager;
 import codechicken.nei.util.NBTJson;
 import makamys.dtools.DTools;
+import makamys.dtools.util.CSVWriter;
 import makamys.dtools.util.Util;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -30,13 +31,12 @@ public class AspectDumper {
         if(ItemPanels.itemPanel.getItems().isEmpty()) {
             throw new IllegalStateException("Open your inventory first");
         }
-        try (FileWriter out = new FileWriter(Util.childFile(DTools.OUT_DIR, "tc-nei-aspects.csv"))) {
-            writeCSVRow(out, "Item Name", "Item ID", "Item meta", "NBT", "Display Name", "Aspects");
+        try (CSVWriter out = new CSVWriter(new FileWriter(Util.childFile(DTools.OUT_DIR, "tc-nei-aspects.csv")))) {
+            out.writeRow("Item Name", "Item ID", "Item meta", "NBT", "Display Name", "Aspects");
             for (ItemStack stack : ItemPanels.itemPanel.getItems()) {
                 AspectList aspects = ThaumcraftApiHelper.getObjectAspects(stack);
                 aspects = ThaumcraftCraftingManager.getBonusTags(stack, aspects);
-                writeCSVRow(
-                    out,
+                out.writeRow(
                     Item.itemRegistry.getNameForObject(stack.getItem()),
                     Integer.toString(Item.getIdFromItem(stack.getItem())),
                     Integer.toString(InventoryUtils.actualDamage(stack)),
@@ -45,18 +45,6 @@ public class AspectDumper {
                     aspectsToString(aspects)
                 );
             }
-        }
-    }
-    
-    private static void writeCSVRow(Writer w, String... columns) throws IOException {
-        w.write(String.join(",", Arrays.stream(columns).map(AspectDumper::escapeCSVString).toArray(String[]::new)) + "\n");
-    }
-    
-    private static String escapeCSVString(String str) {
-        if(str.contains("\"")) {
-            return "\"" + str.replace("\"", "\"\"") + "\"";
-        } else {
-            return str;
         }
     }
     
