@@ -16,6 +16,7 @@ public class DToolsCommand extends CommandBase {
     public static final EnumChatFormatting HELP_USAGE_COLOR = EnumChatFormatting.YELLOW;
     public static final EnumChatFormatting HELP_WARNING_COLOR = EnumChatFormatting.YELLOW;
     public static final EnumChatFormatting HELP_EMPHASIS_COLOR = EnumChatFormatting.DARK_AQUA;
+    public static final EnumChatFormatting ERROR_COLOR = EnumChatFormatting.RED;
     
     private static Map<String, ISubCommand> subCommands = new HashMap<>();
     
@@ -48,6 +49,10 @@ public class DToolsCommand extends CommandBase {
             }
         }
         throw new WrongUsageException("dtools <" + String.join("|", subCommands.keySet()) + ">", new Object[0]);
+    }
+    
+    public static void addChatMessage(ICommandSender sender, String text) {
+        sender.addChatMessage(new ChatComponentText(text));
     }
     
     public static void addColoredChatMessage(ICommandSender sender, String text, EnumChatFormatting color) {

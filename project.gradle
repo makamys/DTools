@@ -17,3 +17,20 @@ jar.manifest.attributes (
 )
 
 apply from: "makalibs.gradle"
+
+repositories {
+    maven {
+        name 'Overmind forge repo mirror'
+        url 'https://gregtech.overminddl1.com/'
+    }
+}
+
+project.ext.override_dependencies = true
+
+dependencies {
+	// This is really only needed so Eclipse can run Thaumcraft
+    compileOnly("com.github.GTNewHorizons:Baubles:1.0.1.14:dev")
+	
+	compileOnly("com.github.GTNewHorizons:NotEnoughItems:2.3.20-GTNH:dev")
+	compileOnly("thaumcraft:Thaumcraft:1.7.10-4.2.3.5:dev")
+}
