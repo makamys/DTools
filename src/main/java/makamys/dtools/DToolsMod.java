@@ -25,6 +25,7 @@ import makamys.dtools.diagnostics.FrameProfiler;
 import makamys.dtools.diagnostics.MethodProfiler;
 import makamys.dtools.diagnostics.PositionDeltaPrinter;
 import makamys.dtools.diagnostics.ServerRunTimePrinter;
+import makamys.dtools.diagnostics.ThaumcraftTools;
 import makamys.dtools.diagnostics.WAIAA;
 import makamys.dtools.diagnostics.Wireframe;
 import makamys.dtools.tweak.automation.AutoWorldLoad;
@@ -91,6 +92,7 @@ public class DToolsMod
         if(Config.dtoolsCommand) {
             ClientCommandHandler.instance.registerCommand(new DToolsCommand());
             WAIAA.instance = new WAIAA();
+            ThaumcraftTools.instance = new ThaumcraftTools();
         }
         if(MethodProfiler.isActive()) {
             FMLCommonHandler.instance().bus().register(MethodProfiler.instance);
