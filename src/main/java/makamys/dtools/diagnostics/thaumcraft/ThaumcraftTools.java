@@ -40,7 +40,7 @@ public static ThaumcraftTools instance;
                                 addColoredChatMessage(sender, "Failed to dump aspects: " + e + ". See log for details.", ERROR_COLOR);
                             }
                         } else {
-                            addColoredChatMessage(sender, "This feature requires the GTNH fork of NotEnoughItems." + usage, ERROR_COLOR);
+                            addColoredChatMessage(sender, "This feature requires the GTNH fork of NotEnoughItems.", ERROR_COLOR);
                         }
                         return;
                     }
