@@ -49,6 +49,9 @@ public class Config {
     @ConfigBoolean(cat="Debug", def=false, com="Print change in XYZ coordinates every tick")
     public static boolean positionDeltaPrint;
     
+    @ConfigBoolean(cat="Tweaks.thaumcraft", def=true, com="Show aspects for all items without having to scan them if player is in creative mode.")
+    public static boolean unlockAllAspects;
+    
     private static Configuration config;
     private static File configFile = new File(Launch.minecraftHome, "config/" + MODID + ".cfg");
     

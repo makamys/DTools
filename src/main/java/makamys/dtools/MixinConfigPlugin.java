@@ -64,6 +64,10 @@ public class MixinConfigPlugin implements IMixinConfigPlugin {
                     "automation.freezeinput.MixinMinecraft",
                     "automation.freezeinput.MixinMouseHelper"
             )); 
+            if(Config.unlockAllAspects) mixins.addAll(Arrays.asList(
+                    "tweak.thaumcraft.unlockallaspects.MixinClientTickEventsFML",
+                    "tweak.thaumcraft.unlockallaspects.MixinPlayerKnowledge"
+            ));
         }
         return mixins;
     }

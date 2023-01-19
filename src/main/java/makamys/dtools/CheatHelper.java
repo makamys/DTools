@@ -1,8 +1,11 @@
 package makamys.dtools;
 
+import java.util.List;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.launchwrapper.Launch;
+import net.minecraft.world.World;
 
 public class CheatHelper {
     
@@ -15,6 +18,18 @@ public class CheatHelper {
             EntityPlayer player = Minecraft.getMinecraft().thePlayer;
             return (player != null && player.capabilities.isCreativeMode);
         }
+    }
+
+    public static boolean isCreative(EntityPlayer player) {
+        return player != null && player.capabilities.isCreativeMode;
+    }
+
+    public static boolean isCreativeByName(String player) {
+        World world = Minecraft.getMinecraft().theWorld;
+        if(world != null) {
+            return isCreative(world.getPlayerEntityByName(player));
+        }
+        return false;
     }
     
 }
