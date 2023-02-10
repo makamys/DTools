@@ -1,4 +1,4 @@
-package makamys.dtools;
+package makamys.dtools.listener;
 
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
@@ -9,7 +9,7 @@ import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.event.FMLServerStoppedEvent;
 import cpw.mods.fml.common.event.FMLServerStoppingEvent;
 
-public interface IModEventListener {
+public interface IFMLEventListener {
     
     default void onPreInit(FMLPreInitializationEvent event) {};
     default void onInit(FMLInitializationEvent event) {};
@@ -20,7 +20,5 @@ public interface IModEventListener {
     default void onServerStarted(FMLServerStartedEvent event) {};
     default void onServerStopping(FMLServerStoppingEvent event) {};
     default void onServerStopped(FMLServerStoppedEvent event) {};
-    
-    default void onShutdown() {};
     
 }

@@ -7,11 +7,11 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerAboutToStartEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent.ClientTickEvent;
-import makamys.dtools.IModEventListener;
+import makamys.dtools.listener.IFMLEventListener;
 import makamys.dtools.util.KeyboardUtil;
 import net.minecraft.client.renderer.Tessellator;
 
-public class Crasher implements IModEventListener {
+public class Crasher implements IFMLEventListener {
     
     public static Crasher instance;
     

@@ -4,10 +4,10 @@ import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 
 import makamys.dtools.CheatHelper;
-import makamys.dtools.IModEventListener;
+import makamys.dtools.listener.IFMLEventListener;
 import net.minecraft.util.MouseHelper;
 
-public class InputFreezer implements IModEventListener {
+public class InputFreezer implements IFMLEventListener {
     
     public static InputFreezer instance;
     

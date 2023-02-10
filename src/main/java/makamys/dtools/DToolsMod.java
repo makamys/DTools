@@ -1,7 +1,8 @@
 package makamys.dtools;
 
-import java.util.ArrayList;
-import java.util.List;
+import static makamys.dtools.DTools.registerListener;
+
+import java.util.function.Consumer;
 
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
@@ -28,6 +29,7 @@ import makamys.dtools.diagnostics.ServerRunTimePrinter;
 import makamys.dtools.diagnostics.WAIAA;
 import makamys.dtools.diagnostics.Wireframe;
 import makamys.dtools.diagnostics.thaumcraft.ThaumcraftTools;
+import makamys.dtools.listener.IFMLEventListener;
 import makamys.dtools.tweak.automation.AutoWorldLoad;
 import makamys.dtools.tweak.crashhandler.Crasher;
 import makamys.dtools.util.KeyboardUtil;
@@ -38,19 +40,12 @@ import net.minecraftforge.client.ClientCommandHandler;
 @Mod(modid = DTools.MODID, version = DTools.VERSION)
 public class DToolsMod
 {
-    private static List<IModEventListener> listeners = new ArrayList<>();
     
     @EventHandler
     public void onConstruction(FMLConstructionEvent event) {
         MCLib.init();
         
         Config.reload();
-        
-        Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
-            @Override
-            public void run() {
-                listeners.forEach(l -> l.onShutdown());
-            }}, "DTools shutdown thread"));
         
         if(Config.crasher) {
             registerListener(Crasher.instance = new Crasher());
@@ -82,7 +77,11 @@ public class DToolsMod
     public void preInit(FMLPreInitializationEvent event) {
         MCLibModules.updateCheckAPI.submitModTask(DTools.MODID, "@UPDATE_URL@");
         
-        listeners.forEach(l -> l.onPreInit(event));
+        forEachFMLEventListener(l -> l.onPreInit(event));
+    }
+    
+    private void forEachFMLEventListener(Consumer<IFMLEventListener> callback) {
+        DTools.forEachListener(IFMLEventListener.class, l -> callback.accept(l));
     }
     
     @EventHandler
@@ -98,46 +97,42 @@ public class DToolsMod
             FMLCommonHandler.instance().bus().register(MethodProfiler.instance);
         }
         
-        listeners.forEach(l -> l.onInit(event));
+        forEachFMLEventListener(l -> l.onInit(event));
     }
     
     @EventHandler
     public void postInit(FMLPostInitializationEvent event) {
-        listeners.forEach(l -> l.onPostInit(event));
+        forEachFMLEventListener(l -> l.onPostInit(event));
     }
     
     @EventHandler
     public void onServerAboutToStart(FMLServerAboutToStartEvent event) {
         Config.reload();
-        listeners.forEach(l -> l.onServerAboutToStart(event));
+        forEachFMLEventListener(l -> l.onServerAboutToStart(event));
     }
     
     @EventHandler
     public void onServerStarting(FMLServerStartingEvent event) {
-        listeners.forEach(l -> l.onServerStarting(event));
+        forEachFMLEventListener(l -> l.onServerStarting(event));
     }
     
     @EventHandler
     public void onServerStarted(FMLServerStartedEvent event) {
-        listeners.forEach(l -> l.onServerStarted(event));
+        forEachFMLEventListener(l -> l.onServerStarted(event));
     }
     
     @EventHandler
     public void onServerStopping(FMLServerStoppingEvent event) {
-        listeners.forEach(l -> l.onServerStopping(event));
+        forEachFMLEventListener(l -> l.onServerStopping(event));
     }
     
     @EventHandler
     public void onServerStopped(FMLServerStoppedEvent event) {
-        listeners.forEach(l -> l.onServerStopped(event));
+        forEachFMLEventListener(l -> l.onServerStopped(event));
     }
     
     @SubscribeEvent
     public void onClientTick(ClientTickEvent event) {
         KeyboardUtil.tick();
-    }
-    
-    public void registerListener(IModEventListener listener) {
-        listeners.add(listener);
     }
 }

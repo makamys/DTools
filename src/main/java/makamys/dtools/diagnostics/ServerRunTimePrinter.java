@@ -4,11 +4,11 @@ import static makamys.dtools.DTools.LOGGER;
 
 import cpw.mods.fml.common.event.FMLServerStartedEvent;
 import cpw.mods.fml.common.event.FMLServerStoppedEvent;
-import makamys.dtools.IModEventListener;
+import makamys.dtools.listener.IFMLEventListener;
 
-public class ServerRunTimePrinter implements IModEventListener {
+public class ServerRunTimePrinter implements IFMLEventListener {
     
-    public static IModEventListener instance;
+    public static ServerRunTimePrinter instance;
     
     private static long startTime;
     

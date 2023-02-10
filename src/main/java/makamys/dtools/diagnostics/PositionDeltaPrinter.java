@@ -8,9 +8,9 @@ import cpw.mods.fml.common.gameevent.TickEvent.Phase;
 import cpw.mods.fml.common.gameevent.TickEvent.PlayerTickEvent;
 import cpw.mods.fml.relauncher.Side;
 import makamys.dtools.DTools;
-import makamys.dtools.IModEventListener;
+import makamys.dtools.listener.IFMLEventListener;
 
-public class PositionDeltaPrinter implements IModEventListener {
+public class PositionDeltaPrinter implements IFMLEventListener {
 
     public static PositionDeltaPrinter instance;
     

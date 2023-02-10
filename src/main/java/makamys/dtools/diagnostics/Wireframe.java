@@ -2,16 +2,16 @@ package makamys.dtools.diagnostics;
 
 import makamys.dtools.CheatHelper;
 import makamys.dtools.Config;
-import makamys.dtools.IModEventListener;
 import makamys.dtools.command.DToolsCommand;
 import makamys.dtools.command.ISubCommand;
+import makamys.dtools.listener.IFMLEventListener;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.EnumChatFormatting;
 
-public class Wireframe implements IModEventListener {
+public class Wireframe implements IFMLEventListener {
 
-    public static IModEventListener instance;
+    public static IFMLEventListener instance;
     
     public Wireframe() {
         DToolsCommand.registerSubCommand("wireframe", new WireframeSubCommand());

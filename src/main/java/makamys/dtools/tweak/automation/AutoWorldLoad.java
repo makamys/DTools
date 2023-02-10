@@ -29,11 +29,11 @@ import cpw.mods.fml.common.gameevent.TickEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import makamys.dtools.Config;
-import makamys.dtools.IModEventListener;
 import makamys.dtools.JVMArgs;
+import makamys.dtools.listener.IFMLEventListener;
 import makamys.dtools.util.MCUtil;
 
-public class AutoWorldLoad implements IModEventListener {
+public class AutoWorldLoad implements IFMLEventListener {
 	
 	public static AutoWorldLoad instance;
 	

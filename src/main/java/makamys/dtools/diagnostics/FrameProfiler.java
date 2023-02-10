@@ -11,9 +11,10 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent;
 import makamys.dtools.Config;
 import makamys.dtools.DTools;
-import makamys.dtools.IModEventListener;
 import makamys.dtools.command.DToolsCommand;
 import makamys.dtools.command.ISubCommand;
+import makamys.dtools.listener.IFMLEventListener;
+import makamys.dtools.listener.ILifeCycleListener;
 import makamys.dtools.util.TableBuilder;
 import makamys.dtools.util.Util;
 import net.minecraft.client.Minecraft;
@@ -28,7 +29,7 @@ import net.minecraft.util.EnumChatFormatting;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.common.MinecraftForge;
 
-public class FrameProfiler implements IModEventListener {
+public class FrameProfiler implements IFMLEventListener, ILifeCycleListener {
     
     public static FrameProfiler instance;
     TableBuilder<Entry, Object> tb;

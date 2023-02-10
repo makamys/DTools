@@ -1,11 +1,11 @@
 package makamys.dtools.diagnostics;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import makamys.dtools.IModEventListener;
+import makamys.dtools.listener.IFMLEventListener;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.common.MinecraftForge;
 
-public class ExtraRAMInfo implements IModEventListener {
+public class ExtraRAMInfo implements IFMLEventListener {
     
     public static ExtraRAMInfo instance;
     
