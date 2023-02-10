@@ -11,6 +11,7 @@ The mod was formerly part of [CoreTweaks](https://github.com/makamys/CoreTweaks)
 * Wireframe rendering
 * Automatically load a world after the game starts 
 * Command to print info about block that is currently being aimed at
+* Class loading logger
 * Dump Thaumcraft aspects of all items (requires [NHEI](https://github.com/GTNewHorizons/NotEnoughItems))
 * Show Thaumcraft aspects for all items without having to scan them if player is in creative mode
 * See the [Config](https://github.com/makamys/DTools/wiki/Config) page on the wiki for the full list.

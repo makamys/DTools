@@ -48,6 +48,8 @@ public class Config {
     public static boolean wireframeStartEnabled;
     @ConfigBoolean(cat="Debug", def=false, com="Print change in XYZ coordinates every tick")
     public static boolean positionDeltaPrint;
+    @ConfigBoolean(cat="Debug", def=false, com="Log class loading. Useful for determining the cause of 'mixin was loaded too early' issues. (You should always try adding Mixingasm first though.)")
+    public static boolean logClassLoading;
     
     @ConfigBoolean(cat="Tweaks.thaumcraft", def=true, com="Show aspects for all items without having to scan them if player is in creative mode.")
     public static boolean unlockAllAspects;

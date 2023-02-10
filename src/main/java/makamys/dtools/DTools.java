@@ -8,6 +8,7 @@ import java.util.function.Consumer;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import makamys.dtools.diagnostics.ClassLoadLog;
 import makamys.dtools.diagnostics.FMLBarProfiler;
 import makamys.dtools.listener.ILifeCycleListener;
 import net.minecraft.launchwrapper.Launch;
@@ -34,6 +35,9 @@ public class DTools {
         
         if(FMLBarProfiler.isActive()) {
             FMLBarProfiler.instance().init();
+        }
+        if(ClassLoadLog.isActive()) {
+            listeners.add(ClassLoadLog.instance = new ClassLoadLog());
         }
     }
     
