@@ -12,6 +12,7 @@ import org.spongepowered.asm.mixin.extensibility.IMixinConfigPlugin;
 import org.spongepowered.asm.mixin.extensibility.IMixinInfo;
 
 import cpw.mods.fml.relauncher.ReflectionHelper;
+import makamys.dtools.diagnostics.WrongMixinHelper;
 import net.minecraft.launchwrapper.Launch;
 import net.minecraft.launchwrapper.LaunchClassLoader;
 
@@ -67,6 +68,10 @@ public class MixinConfigPlugin implements IMixinConfigPlugin {
             if(Config.unlockAllAspects) mixins.addAll(Arrays.asList(
                     "tweak.thaumcraft.unlockallaspects.MixinClientTickEventsFML",
                     "tweak.thaumcraft.unlockallaspects.MixinPlayerKnowledge"
+            ));
+            if(WrongMixinHelper.isEnabled()) mixins.addAll(Arrays.asList(
+                    "diagnostics.wrongmixin.MixinGuiAchievements",
+                    "diagnostics.wrongmixin.MixinGuiTextField"
             ));
         }
         return mixins;
