@@ -64,14 +64,14 @@ public class MixinConfigPlugin implements IMixinConfigPlugin {
             if(Config.freezeInputKey) mixins.addAll(Arrays.asList(
                     "automation.freezeinput.MixinMinecraft",
                     "automation.freezeinput.MixinMouseHelper"
-            )); 
-            if(Config.unlockAllAspects) mixins.addAll(Arrays.asList(
-                    "tweak.thaumcraft.unlockallaspects.MixinClientTickEventsFML",
-                    "tweak.thaumcraft.unlockallaspects.MixinPlayerKnowledge"
             ));
             if(WrongMixinHelper.isEnabled()) mixins.addAll(Arrays.asList(
                     "diagnostics.wrongmixin.MixinGuiAchievements",
                     "diagnostics.wrongmixin.MixinGuiTextField"
+            ));
+            if(Compat.isThaumcraftPresent() && Config.unlockAllAspects) mixins.addAll(Arrays.asList(
+                    "tweak.thaumcraft.unlockallaspects.MixinClientTickEventsFML",
+                    "tweak.thaumcraft.unlockallaspects.MixinPlayerKnowledge"
             ));
         }
         return mixins;

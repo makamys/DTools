@@ -10,4 +10,12 @@ public class Compat {
         return mc != null && mc.getVersion().contains("-GTNH");
     }
 
+    public static boolean isThaumcraftPresent() {
+        return isClassPresent("thaumcraft.codechicken.core.launch.DepLoader");
+    }
+
+    private static boolean isClassPresent(String className) {
+        return Compat.class.getResource("/" + className.replace('.', '/') + ".class") != null;
+    }
+
 }
