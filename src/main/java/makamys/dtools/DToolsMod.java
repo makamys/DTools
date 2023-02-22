@@ -22,6 +22,7 @@ import cpw.mods.fml.relauncher.Side;
 import makamys.dtools.automation.InputFreezer;
 import makamys.dtools.command.DToolsCommand;
 import makamys.dtools.diagnostics.ExtraRAMInfo;
+import makamys.dtools.diagnostics.FMLProxyPacketCrasher;
 import makamys.dtools.diagnostics.FrameProfiler;
 import makamys.dtools.diagnostics.MethodProfiler;
 import makamys.dtools.diagnostics.PositionDeltaPrinter;
@@ -69,6 +70,9 @@ public class DToolsMod
             }
             if(Config.freezeInputKey) {
                 registerListener(InputFreezer.instance = new InputFreezer());
+            }
+            if(FMLProxyPacketCrasher.isActive()) {
+                registerListener(FMLProxyPacketCrasher.instance = new FMLProxyPacketCrasher());
             }
         }
     }
