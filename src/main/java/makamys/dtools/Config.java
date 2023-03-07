@@ -77,9 +77,7 @@ public class Config {
                 "* -Ddtools.launchMinimized : Launch Minecraft minimized. Only implemented on Windows at the moment.\n" +
                 "* -Ddtools.launchOnDesktop=NUMBER : Launch Minecraft on the virtual desktop with ordinal NUMBER. Only implemented on Linux at the moment. xprop has to be installed for it to work. Only tested on Openbox.");
         
-        if(ConfigDumper.ENABLED) {
-            ConfigDumper.dumpConfig(config);
-        }
+        ConfigDumper.dumpConfigIfEnabled(config, MODID);
         
         if(config.hasChanged()) {
             config.save();
