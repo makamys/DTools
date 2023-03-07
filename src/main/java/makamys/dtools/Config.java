@@ -52,6 +52,8 @@ public class Config {
     public static boolean logClassLoading;
     @ConfigBoolean(cat="Debug", def=true, com="Adds a command to dump mob spawn tables")
     public static boolean dumpSpawnTables;
+    @ConfigBoolean(cat="Debug", def=false, com="Writes the camera coordinates and world seed of each screenshot into `.minecraft/dtools/wherewasi/<world_name>.hjson`")
+    public static boolean logScreenshotPosition;
     
     @ConfigBoolean(cat="Tweaks.thaumcraft", def=true, com="Show aspects for all items without having to scan them if player is in creative mode.")
     public static boolean unlockAllAspects;

@@ -73,6 +73,7 @@ public class MixinConfigPlugin implements IMixinConfigPlugin {
                     "tweak.thaumcraft.unlockallaspects.MixinClientTickEventsFML",
                     "tweak.thaumcraft.unlockallaspects.MixinPlayerKnowledge"
             ));
+            if(Config.logScreenshotPosition) mixins.add("diagnostics.wherewasi.MixinScreenshotHelper");
         }
         return mixins;
     }
