@@ -7,18 +7,16 @@ import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.IChatComponent;
 import net.minecraft.world.biome.BiomeGenBase;
-import net.minecraftforge.client.ClientCommandHandler;
-import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
 
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 
 import org.apache.commons.io.FileUtils;
 
-import cpw.mods.fml.common.event.FMLInitializationEvent;
 import makamys.dtools.DTools;
+import makamys.dtools.command.DToolsCommand;
+import makamys.dtools.command.ISubCommand;
 import makamys.dtools.listener.IFMLEventListener;
 import makamys.dtools.util.Util;
 
@@ -26,9 +24,8 @@ public class DumpSpawnTables implements IFMLEventListener {
     
     public static DumpSpawnTables instance;
 
-    @Override
-    public void onInit(FMLInitializationEvent event) {
-        ClientCommandHandler.instance.registerCommand(new DumpSpawnsCommand());
+    public DumpSpawnTables() {
+        DToolsCommand.registerSubCommand("dumpspawntables", new DumpSpawnTablesSubCommand());
     }
     
     public static IChatComponent dumpSpawns() {
@@ -62,22 +59,7 @@ public class DumpSpawnTables implements IFMLEventListener {
         return new ChatComponentTranslation("Wrote dump to %s", new Object[] {cct});
     }
     
-    public class DumpSpawnsCommand extends CommandBase {
-
-        @Override
-        public String getCommandName() {
-            return "dumpspawns";
-        }
-
-        @Override
-        public String getCommandUsage(ICommandSender sender) {
-            return "";
-        }
-        
-        public int getRequiredPermissionLevel()
-        {
-            return 0;
-        }
+    public class DumpSpawnTablesSubCommand implements ISubCommand {
 
         @Override
         public void processCommand(ICommandSender sender, String[] args) {
