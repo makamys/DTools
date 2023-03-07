@@ -21,6 +21,7 @@ import cpw.mods.fml.common.gameevent.TickEvent.ClientTickEvent;
 import cpw.mods.fml.relauncher.Side;
 import makamys.dtools.automation.InputFreezer;
 import makamys.dtools.command.DToolsCommand;
+import makamys.dtools.diagnostics.DumpSpawnTables;
 import makamys.dtools.diagnostics.ExtraRAMInfo;
 import makamys.dtools.diagnostics.FMLProxyPacketCrasher;
 import makamys.dtools.diagnostics.FrameProfiler;
@@ -53,6 +54,9 @@ public class DToolsMod
         }
         if(Config.serverRunTimePrinter) {
             registerListener(ServerRunTimePrinter.instance = new ServerRunTimePrinter());
+        }
+        if(Config.dumpSpawnTables) {
+            registerListener(DumpSpawnTables.instance = new DumpSpawnTables());
         }
         if(event.getSide() == Side.CLIENT) {
             registerListener(FrameProfiler.instance = new FrameProfiler());
