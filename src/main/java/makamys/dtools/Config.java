@@ -31,7 +31,7 @@ public class Config {
     @ConfigBoolean(cat="Profiling", def=false, com="Show extra RAM info in F3 overlay.")
     public static boolean extraRamInfo;
     
-    @ConfigBoolean(cat="Automation", def=true, com="Pause some ticks after auto-loaded world is loaded.\\nDelaying the pausing can be useful because some initialization like chunk updates won't happen while the game is paused.")
+    @ConfigBoolean(cat="Automation", def=true, com="Pause some ticks after auto-loaded world is loaded.\nDelaying the pausing can be useful because some initialization like chunk updates won't happen while the game is paused.")
     public static boolean autoLoadPauseOnWorldEntry;
     @ConfigBoolean(cat="Automation", def=true, com="Ding once auto-loaded world is loaded.")
     public static boolean autoLoadDingOnWorldEntry;
