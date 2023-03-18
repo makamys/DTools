@@ -1,7 +1,5 @@
 package makamys.dtools;
 
-import java.util.List;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.launchwrapper.Launch;
@@ -15,8 +13,7 @@ public class CheatHelper {
         if(IS_DEV_ENVIRONMENT) {
             return true;
         } else {
-            EntityPlayer player = Minecraft.getMinecraft().thePlayer;
-            return (player != null && player.capabilities.isCreativeMode);
+            return isCreative(Minecraft.getMinecraft().thePlayer);
         }
     }
 
