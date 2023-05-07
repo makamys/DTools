@@ -1,9 +1,10 @@
 {
   "homepage": "https://github.com/makamys/DTools/releases",
   "1.7.10": {
-    "0.1": ""
+    "0.1": "",
+    "0.2": ""
   },
   "promos": {
-    "1.7.10-latest": "0.1"
+    "1.7.10-latest": "0.2"
   }
 }
