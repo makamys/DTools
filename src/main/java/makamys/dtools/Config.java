@@ -55,6 +55,8 @@ public class Config {
     @ConfigBoolean(cat="Debug", def=false, com="Writes the camera coordinates and world seed of each screenshot into `.minecraft/dtools/wherewasi/<world_name>.hjson`")
     public static boolean logScreenshotPosition;
     
+    @ConfigBoolean(cat="Tweaks", def=true, com="Increase fly speed while sprinting. From Et Futurum Requiem.\nCompatibility note: Will be disabled if Et Futurum Requiem is present.")
+    public static boolean sprintFlying;
     @ConfigBoolean(cat="Tweaks.thaumcraft", def=true, com="Show aspects for all items without having to scan them if player is in creative mode.")
     public static boolean unlockAllAspects;
     

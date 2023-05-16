@@ -16,6 +16,7 @@ The mod was formerly part of [CoreTweaks](https://github.com/makamys/CoreTweaks)
 * Show Thaumcraft aspects for all items without having to scan them if player is in creative mode
 * Dump mob spawn tables
 * Log the camera position and world seed of each screenshot to a file
+* Sprint flying (from Et Futurum Requiem)
 * See the [Config](https://github.com/makamys/DTools/wiki/Config) page on the wiki for the full list.
 
 ## Usage
@@ -31,6 +32,10 @@ The mod comes in two flavors:
 ## Suggested mods
 
 For more 1.7.10 bugfix/performance/debug mods, refer to [this list](https://gist.github.com/makamys/7cb74cd71d93a4332d2891db2624e17c).
+
+## Credits
+
+- Sprint flying code is based on code from [Et Futurum Requiem](https://github.com/Roadhog360/Et-Futurum-Requiem).
 
 ## License
 

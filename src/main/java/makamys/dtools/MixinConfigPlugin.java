@@ -69,11 +69,12 @@ public class MixinConfigPlugin implements IMixinConfigPlugin {
                     "diagnostics.wrongmixin.MixinGuiAchievements",
                     "diagnostics.wrongmixin.MixinGuiTextField"
             ));
+            if(Config.logScreenshotPosition) mixins.add("diagnostics.wherewasi.MixinScreenshotHelper");
             if(Compat.isThaumcraftPresent() && Config.unlockAllAspects) mixins.addAll(Arrays.asList(
                     "tweak.thaumcraft.unlockallaspects.MixinClientTickEventsFML",
                     "tweak.thaumcraft.unlockallaspects.MixinPlayerKnowledge"
             ));
-            if(Config.logScreenshotPosition) mixins.add("diagnostics.wherewasi.MixinScreenshotHelper");
+            if(!Compat.isEtFuturumRequiemPresent() && Config.sprintFlying) mixins.add("tweak.flyspeed.MixinEntityPlayer");
         }
         return mixins;
     }

@@ -13,6 +13,10 @@ public class Compat {
     public static boolean isThaumcraftPresent() {
         return isClassPresent("thaumcraft.codechicken.core.launch.DepLoader");
     }
+    
+    public static boolean isEtFuturumRequiemPresent() {
+        return isClassPresent("ganymedes01.etfuturum.EtFuturum");
+    }
 
     private static boolean isClassPresent(String className) {
         return Compat.class.getResource("/" + className.replace('.', '/') + ".class") != null;
