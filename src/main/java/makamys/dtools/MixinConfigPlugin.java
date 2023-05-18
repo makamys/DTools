@@ -75,6 +75,10 @@ public class MixinConfigPlugin implements IMixinConfigPlugin {
                     "tweak.thaumcraft.unlockallaspects.MixinPlayerKnowledge"
             ));
             if(!Compat.isEtFuturumRequiemPresent() && Config.sprintFlying) mixins.add("tweak.flyspeed.MixinEntityPlayer");
+            if(!Compat.isEtFuturumRequiemPresent() && Config.doWeatherCycle) mixins.addAll(Arrays.asList(
+                    "tweak.doweathercycle.MixinCommandHandler",
+                    "tweak.doweathercycle.MixinWorldInfo")
+                    );
         }
         return mixins;
     }

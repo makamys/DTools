@@ -57,6 +57,8 @@ public class Config {
     
     @ConfigBoolean(cat="Tweaks", def=true, com="Increase fly speed while sprinting. From Et Futurum Requiem.\nCompatibility note: Will be disabled if Et Futurum Requiem is present.")
     public static boolean sprintFlying;
+    @ConfigBoolean(cat="Tweaks", def=true, com="Backports the doWeatherCycle game rule. From Et Futurum Requiem.\nCompatibility note: Will be disabled if Et Futurum Requiem is present.")
+    public static boolean doWeatherCycle;
     @ConfigBoolean(cat="Tweaks.thaumcraft", def=true, com="Show aspects for all items without having to scan them if player is in creative mode.")
     public static boolean unlockAllAspects;
     
