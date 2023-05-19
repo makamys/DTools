@@ -38,8 +38,8 @@ public class GuiButtonDevSetup extends GuiButtonGeneric {
         tooltip.add("Set up a test world.");
         tooltip.add("");
         String enabledColor = config.type == 1 ? ""+EnumChatFormatting.GREEN : ""+EnumChatFormatting.BLUE;
-        String baseDisabledColor = "" + EnumChatFormatting.WHITE;
-        String extraDisabledColor = "" + (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) ? EnumChatFormatting.WHITE : EnumChatFormatting.DARK_GRAY);
+        String baseDisabledColor = config.type == 0 ? "" + EnumChatFormatting.WHITE : ""+EnumChatFormatting.DARK_GRAY;
+        String extraDisabledColor = "" + (config.type <= 1 && Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) ? EnumChatFormatting.WHITE : EnumChatFormatting.DARK_GRAY);
         tooltip.add(generateSettingDescription("Creative mode", config.setGamemodeCreative, enabledColor, baseDisabledColor));
         tooltip.add(generateSettingDescription("Enable cheats", config.enableCheats, enabledColor, baseDisabledColor));
         tooltip.add(generateSettingDescription("Disable daylight cycle", config.disableDoDaylightCycle, enabledColor, baseDisabledColor));
