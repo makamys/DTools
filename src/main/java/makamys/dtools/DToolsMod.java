@@ -32,6 +32,7 @@ import makamys.dtools.diagnostics.WAIAA;
 import makamys.dtools.diagnostics.Wireframe;
 import makamys.dtools.diagnostics.thaumcraft.ThaumcraftTools;
 import makamys.dtools.listener.IFMLEventListener;
+import makamys.dtools.tweak.GamemodeSwitcher;
 import makamys.dtools.tweak.automation.AutoWorldLoad;
 import makamys.dtools.tweak.crashhandler.Crasher;
 import makamys.dtools.tweak.devsetup.DevWorldSetup;
@@ -81,6 +82,9 @@ public class DToolsMod
             }
             if(Config.devWorldSetup) {
                 registerListener(DevWorldSetup.instance = new DevWorldSetup());
+            }
+            if(Config.gamemodeSwitcher && !Compat.isEtFuturumRequiemPresent()) {
+                registerListener(GamemodeSwitcher.instance = new GamemodeSwitcher());
             }
         }
     }
