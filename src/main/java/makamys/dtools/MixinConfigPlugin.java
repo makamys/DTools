@@ -82,6 +82,9 @@ public class MixinConfigPlugin implements IMixinConfigPlugin {
             if(Config.devWorldSetup) mixins.addAll(Arrays.asList(
                     "tweak.devsetup.MixinGuiCreateWorld")
             );
+            if(Config.worldDeleter) mixins.addAll(Arrays.asList(
+                    "tweak.worlddeleter.MixinGuiSelectWorld")
+            );
         }
         return mixins;
     }

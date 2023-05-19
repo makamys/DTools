@@ -63,6 +63,8 @@ public class Config {
     public static boolean devWorldSetup;
     @ConfigBoolean(cat="Tweaks", def=true, com="Switch gamemode between survival and creative when pressing F3+F4.\nCompatibility note: Will be disabled if Et Futurum Requiem is present.")
     public static boolean gamemodeSwitcher;
+    @ConfigBoolean(cat="Tweaks", def=false, com="Adds keyboard combinations to quickly delete worlds: Pressing Alt+D in the world selection GUI will delete only the world region data, Shift+D will delete the world completely forever (a long time!)")
+    public static boolean worldDeleter;
     @ConfigBoolean(cat="Tweaks.thaumcraft", def=true, com="Show aspects for all items without having to scan them if player is in creative mode.")
     public static boolean unlockAllAspects;
     
