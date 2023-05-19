@@ -6,8 +6,8 @@ import java.util.stream.IntStream;
 
 import org.lwjgl.input.Keyboard;
 
-import makamys.dtools.tweak.devsetup.DevWorldSetup;
-import makamys.dtools.tweak.devsetup.DevWorldSetup.Config.ConfigItem;
+import makamys.dtools.tweak.devsetup.Config;
+import makamys.dtools.tweak.devsetup.Config.ConfigItem;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiCreateWorld;
@@ -16,7 +16,7 @@ import net.minecraft.world.WorldType;
 
 public class GuiButtonDevSetup extends GuiButtonGeneric {
 
-    public DevWorldSetup.Config config = new DevWorldSetup.Config();
+    public Config config = new Config();
     private GuiButton worldType;
     private GuiCreateWorldManipulator guiManipulator;
     
@@ -87,7 +87,7 @@ public class GuiButtonDevSetup extends GuiButtonGeneric {
         super.drawButton(p_146112_1_, mouseX, mouseY);
     }
     
-    private void applyConfig(DevWorldSetup.Config config) {
+    private void applyConfig(Config config) {
         if(!guiManipulator.setGamemode(config.setGamemodeCreative.isEnabled() ? "creative" : defaultGamemode)) {
             config.setGamemodeCreative.setSynced(false);
         }
