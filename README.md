@@ -16,7 +16,9 @@ The mod was formerly part of [CoreTweaks](https://github.com/makamys/CoreTweaks)
 * Show Thaumcraft aspects for all items without having to scan them if player is in creative mode
 * Dump mob spawn tables
 * Log the camera position and world seed of each screenshot to a file
-* Sprint flying (from Et Futurum Requiem)
+* Backports of sprint flying and `doWeatherCycle` (from Et Futurum Requiem)
+* A simple F3+F4 gamemode switcher
+* A one-button "dev world primer" that automatically sets [stuff like `doDaylightCycle false`](src/main/resources/assets/dtools/default_config/dtools/devsetup.ini).
 * See the [Config](https://github.com/makamys/DTools/wiki/Config) page on the wiki for the full list.
 
 ## Usage
