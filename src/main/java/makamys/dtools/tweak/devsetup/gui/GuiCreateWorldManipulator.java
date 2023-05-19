@@ -2,12 +2,23 @@ package makamys.dtools.tweak.devsetup.gui;
 
 import java.util.function.Supplier;
 
+import lombok.Getter;
 import net.minecraft.client.gui.GuiCreateWorld;
 import net.minecraft.world.WorldType;
 
 public class GuiCreateWorldManipulator {
     
     private final GuiCreateWorld gui;
+    
+    @Getter
+    private String defaultGamemode;
+    @Getter
+    private int defaultWorldTypeIndex;
+    // we use Boolean instead of boolean to force lombok to use a get prefix, lul
+    @Getter
+    private Boolean defaultEnableCheats;
+    @Getter
+    private Boolean defaultEnableStructures;
     
     public GuiCreateWorldManipulator(GuiCreateWorld gui) {
         this.gui = gui;
@@ -74,6 +85,13 @@ public class GuiCreateWorldManipulator {
             return true;
         }
         return false;
+    }
+
+    public void saveDefaults() {
+        defaultWorldTypeIndex = getWorldTypeIndex();
+        defaultGamemode = getGamemodeName();
+        defaultEnableCheats = areCheatsEnabled();
+        defaultEnableStructures = areStructuresEnabled();
     }
     
 }

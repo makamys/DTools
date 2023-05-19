@@ -11,6 +11,7 @@ import cpw.mods.fml.common.network.FMLNetworkEvent.ClientConnectedToServerEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import makamys.dtools.listener.IFMLEventListener;
+import makamys.dtools.tweak.devsetup.Config.ConfigItem;
 import makamys.dtools.tweak.devsetup.gui.GuiButtonDevSetup;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
@@ -57,17 +58,10 @@ public class DevWorldSetup implements IFMLEventListener {
     
     @SideOnly(Side.CLIENT)
     private void applyConfig(Config config, MinecraftServer server) {
-        if(config.disableDoDaylightCycle.isEnabled()) {
-            server.worldServerForDimension(0).getGameRules().setOrCreateGameRule("doDaylightCycle", "false");
-            for (int j = 0; j < server.worldServers.length; ++j) {
-                MinecraftServer.getServer().worldServers[j].setWorldTime((long)6000);
+        for(ConfigItem item : config.items) {
+            if(item.isEnabled()) {
+                item.applyChange(server);
             }
-        }
-        if(config.disableDoWeatherCycle.isEnabled()) {
-            server.worldServerForDimension(0).getGameRules().setOrCreateGameRule("doWeatherCycle", "false");
-        }
-        if(config.disableDoMobSpawning.isEnabled()) {
-            server.worldServerForDimension(0).getGameRules().setOrCreateGameRule("doMobSpawning", "false");
         }
     }
     
