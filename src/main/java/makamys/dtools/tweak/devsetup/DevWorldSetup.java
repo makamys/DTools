@@ -24,6 +24,9 @@ public class DevWorldSetup implements IFMLEventListener {
     @SideOnly(Side.CLIENT)
     Map<GuiScreen, GuiButtonDevSetup> buttonMap = new WeakHashMap<>();
     
+    @SideOnly(Side.CLIENT)
+    public static final int buttonId = -916057709;
+    
     @Override
     public void onInit(FMLInitializationEvent event) {
         Minecraft mc = Minecraft.getMinecraft();
@@ -36,7 +39,7 @@ public class DevWorldSetup implements IFMLEventListener {
     public void onGui(InitGuiEvent.Post event) {
         if(event.gui instanceof GuiCreateWorld) {
             GuiButton worldTypeButton = (GuiButton)event.buttonList.stream().filter(b -> b instanceof GuiButton && ((GuiButton)b).id == 5).findFirst().orElseGet(() -> null);
-            GuiButtonDevSetup button = buttonMap.computeIfAbsent(event.gui, x -> new GuiButtonDevSetup(1337, event.gui.width / 2 + 75 + 8, 115, 40, 20, (GuiCreateWorld)event.gui));
+            GuiButtonDevSetup button = buttonMap.computeIfAbsent(event.gui, x -> new GuiButtonDevSetup(buttonId, event.gui.width / 2 + 75 + 8, 115, 40, 20, (GuiCreateWorld)event.gui));
             button.setWorldTypeButton(worldTypeButton);
             event.buttonList.add(button);
         }
