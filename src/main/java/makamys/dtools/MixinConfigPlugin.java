@@ -78,7 +78,10 @@ public class MixinConfigPlugin implements IMixinConfigPlugin {
             if(!Compat.isEtFuturumRequiemPresent() && Config.doWeatherCycle) mixins.addAll(Arrays.asList(
                     "tweak.doweathercycle.MixinCommandHandler",
                     "tweak.doweathercycle.MixinWorldInfo")
-                    );
+            );
+            if(Config.devWorldSetup) mixins.addAll(Arrays.asList(
+                    "tweak.devsetup.MixinGuiCreateWorld")
+            );
         }
         return mixins;
     }

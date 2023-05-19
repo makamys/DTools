@@ -5,7 +5,9 @@ import java.util.WeakHashMap;
 
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
+import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.network.FMLNetworkEvent.ClientConnectedToServerEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import makamys.dtools.listener.IFMLEventListener;
@@ -14,6 +16,9 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiCreateWorld;
 import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.world.storage.ISaveFormat;
+import net.minecraft.world.storage.WorldInfo;
 import net.minecraftforge.client.event.GuiScreenEvent.InitGuiEvent;
 import net.minecraftforge.common.MinecraftForge;
 
@@ -25,13 +30,52 @@ public class DevWorldSetup implements IFMLEventListener {
     Map<GuiScreen, GuiButtonDevSetup> buttonMap = new WeakHashMap<>();
     
     @SideOnly(Side.CLIENT)
+    Map<String, Config> configMap = new WeakHashMap<>();
+    
+    @SideOnly(Side.CLIENT)
     public static final int buttonId = -916057709;
     
     @Override
     public void onInit(FMLInitializationEvent event) {
-        Minecraft mc = Minecraft.getMinecraft();
         MinecraftForge.EVENT_BUS.register(this);
         FMLCommonHandler.instance().bus().register(this);
+    }
+    
+    @Override
+    public void onServerStarting(FMLServerStartingEvent event) {
+        if(event.getSide() == Side.CLIENT) {
+            ISaveFormat saveLoader = Minecraft.getMinecraft().getSaveLoader();
+            WorldInfo wi = saveLoader.getWorldInfo(event.getServer().getFolderName());
+            if(!wi.isInitialized()) {
+                Config config = configMap.get(event.getServer().getFolderName());
+                if(config != null) {
+                    applyConfig(config, event.getServer());
+                }
+            }
+        }
+    }
+    
+    @SideOnly(Side.CLIENT)
+    private void applyConfig(Config config, MinecraftServer server) {
+        if(config.disableDoDaylightCycle.isEnabled()) {
+            server.worldServerForDimension(0).getGameRules().setOrCreateGameRule("doDaylightCycle", "false");
+            for (int j = 0; j < server.worldServers.length; ++j) {
+                MinecraftServer.getServer().worldServers[j].setWorldTime((long)6000);
+            }
+        }
+        if(config.disableDoWeatherCycle.isEnabled()) {
+            server.worldServerForDimension(0).getGameRules().setOrCreateGameRule("doWeatherCycle", "false");
+        }
+        if(config.disableDoMobSpawning.isEnabled()) {
+            server.worldServerForDimension(0).getGameRules().setOrCreateGameRule("doMobSpawning", "false");
+        }
+    }
+    
+    @SubscribeEvent
+    @SideOnly(Side.CLIENT)
+    public void onConnectToServer(ClientConnectedToServerEvent event) {
+        buttonMap.clear();
+        configMap.clear();
     }
     
     @SubscribeEvent
@@ -45,6 +89,15 @@ public class DevWorldSetup implements IFMLEventListener {
         }
     }
     
+    @SideOnly(Side.CLIENT)
+    public void preLaunchIntegratedServer(GuiCreateWorld gui, String folderName) {
+        GuiButtonDevSetup button = buttonMap.get(gui);
+        if(button != null) {
+            configMap.put(folderName, button.config);
+        }
+    }
+    
+    @SideOnly(Side.CLIENT)
     public static class Config {
         // Base preset
         public ConfigItem setGamemodeCreative = new ConfigItem();
@@ -103,7 +156,8 @@ public class DevWorldSetup implements IFMLEventListener {
             }
 
             public void setSynced(boolean synced) {
-                this.isSynced = synced;
+                // TODO override gui
+                //this.isSynced = synced;
             }
             
             public boolean isSynced() {
