@@ -59,9 +59,6 @@ public class DToolsMod
         if(Config.dumpSpawnTables) {
             registerListener(DumpSpawnTables.instance = new DumpSpawnTables());
         }
-        if(Config.devWorldSetup) {
-            registerListener(DevWorldSetup.instance = new DevWorldSetup());
-        }
         if(event.getSide() == Side.CLIENT) {
             registerListener(FrameProfiler.instance = new FrameProfiler());
             if(JVMArgs.LAUNCH_WORLD != null) {
@@ -81,6 +78,9 @@ public class DToolsMod
             }
             if(FMLProxyPacketCrasher.isActive()) {
                 registerListener(FMLProxyPacketCrasher.instance = new FMLProxyPacketCrasher());
+            }
+            if(Config.devWorldSetup) {
+                registerListener(DevWorldSetup.instance = new DevWorldSetup());
             }
         }
     }
