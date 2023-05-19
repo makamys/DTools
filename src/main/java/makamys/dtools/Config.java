@@ -59,6 +59,8 @@ public class Config {
     public static boolean sprintFlying;
     @ConfigBoolean(cat="Tweaks", def=true, com="Backports the doWeatherCycle game rule. From Et Futurum Requiem.\nCompatibility note: Will be disabled if Et Futurum Requiem is present.")
     public static boolean doWeatherCycle;
+    @ConfigBoolean(cat="Tweaks", def=true, com="Adds a button to the world creation GUI for convenient setup of test worlds.")
+    public static boolean devWorldSetup;
     @ConfigBoolean(cat="Tweaks.thaumcraft", def=true, com="Show aspects for all items without having to scan them if player is in creative mode.")
     public static boolean unlockAllAspects;
     

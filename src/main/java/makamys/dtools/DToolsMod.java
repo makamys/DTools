@@ -34,6 +34,7 @@ import makamys.dtools.diagnostics.thaumcraft.ThaumcraftTools;
 import makamys.dtools.listener.IFMLEventListener;
 import makamys.dtools.tweak.automation.AutoWorldLoad;
 import makamys.dtools.tweak.crashhandler.Crasher;
+import makamys.dtools.tweak.devsetup.DevWorldSetup;
 import makamys.dtools.util.KeyboardUtil;
 import makamys.mclib.core.MCLib;
 import makamys.mclib.core.MCLibModules;
@@ -57,6 +58,9 @@ public class DToolsMod
         }
         if(Config.dumpSpawnTables) {
             registerListener(DumpSpawnTables.instance = new DumpSpawnTables());
+        }
+        if(Config.devWorldSetup) {
+            registerListener(DevWorldSetup.instance = new DevWorldSetup());
         }
         if(event.getSide() == Side.CLIENT) {
             registerListener(FrameProfiler.instance = new FrameProfiler());
