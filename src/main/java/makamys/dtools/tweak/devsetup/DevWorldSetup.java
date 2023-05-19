@@ -36,7 +36,9 @@ public class DevWorldSetup implements IFMLEventListener {
     public void onGui(InitGuiEvent.Post event) {
         if(event.gui instanceof GuiCreateWorld) {
             GuiButton worldTypeButton = (GuiButton)event.buttonList.stream().filter(b -> b instanceof GuiButton && ((GuiButton)b).id == 5).findFirst().orElseGet(() -> null);
-            event.buttonList.add(buttonMap.computeIfAbsent(event.gui, x -> new GuiButtonDevSetup(1337, event.gui.width / 2 + 75 + 8, 115, 40, 20, (GuiCreateWorld)event.gui, worldTypeButton)));
+            GuiButtonDevSetup button = buttonMap.computeIfAbsent(event.gui, x -> new GuiButtonDevSetup(1337, event.gui.width / 2 + 75 + 8, 115, 40, 20, (GuiCreateWorld)event.gui));
+            button.setWorldTypeButton(worldTypeButton);
+            event.buttonList.add(button);
         }
     }
     

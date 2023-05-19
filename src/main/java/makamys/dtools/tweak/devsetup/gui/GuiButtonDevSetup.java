@@ -27,10 +27,13 @@ public class GuiButtonDevSetup extends GuiButtonGeneric {
     private boolean defaultEnableStructures;
     private int superflatWorldTypeIndex;
     
-    public GuiButtonDevSetup(int id, int posX, int posY, int width, int height, GuiCreateWorld createWorld, GuiButton worldTypeButton) {
+    public GuiButtonDevSetup(int id, int posX, int posY, int width, int height, GuiCreateWorld createWorld) {
         super(id, posX, posY, width, height, "Dev");
-        this.worldType = worldTypeButton;
         this.guiManipulator = new GuiCreateWorldManipulator(createWorld);
+    }
+    
+    public void setWorldTypeButton(GuiButton worldTypeButton) {
+        this.worldType = worldTypeButton;
     }
     
     public List<String> getTooltipStrings() {
