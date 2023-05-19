@@ -1,16 +1,13 @@
 package makamys.dtools.tweak.devsetup.gui;
 
-import makamys.dtools.tweak.devsetup.DevWorldSetup.MutableTrilean;
-import makamys.dtools.tweak.devsetup.DevWorldSetup.Trilean;
+import java.util.function.Supplier;
+
 import net.minecraft.client.gui.GuiCreateWorld;
 import net.minecraft.world.WorldType;
 
 public class GuiCreateWorldManipulator {
     
     private final GuiCreateWorld gui;
-    
-    public String defaultGamemode;
-    public int defaultWorldType;
     
     public GuiCreateWorldManipulator(GuiCreateWorld gui) {
         this.gui = gui;
@@ -40,40 +37,43 @@ public class GuiCreateWorldManipulator {
         return gui.field_146331_K;
     }
     
-    public void setSuperflat(MutableTrilean value) {
-        if(value.get() != Trilean.UNSET) {
-            boolean newVal = value.isTrue();
-            while(!(newVal ? isSuperflat() : getWorldTypeIndex() == defaultWorldType)) {
-                gui.actionPerformed(gui.field_146320_D);
-            }
-        }
+    public boolean setWorldTypeIndex(int index) {
+        return tryToSetValue(() -> gui.actionPerformed(gui.field_146320_D), this::getWorldTypeIndex, index);
     }
 
-    public void setDisableStructures(MutableTrilean value) {
-        if(value.get() != Trilean.UNSET) {
-            boolean newVal = value.isTrue();
-            while(areStructuresEnabled() != !newVal) {
-                gui.actionPerformed(gui.field_146325_B);
-            }
-        }
+    public boolean setEnableStructures(boolean value) {
+        return tryToSetValue(() -> gui.actionPerformed(gui.field_146325_B), this::areStructuresEnabled, value);
     }
 
-    public void setEnableCheats(MutableTrilean value) {
-        if(value.get() != Trilean.UNSET) {
-            boolean newVal = value.isTrue();
-            while(areCheatsEnabled() != newVal) {
-                gui.actionPerformed(gui.field_146321_E);
-            }
-        }
+    public boolean setEnableCheats(boolean value) {
+        return tryToSetValue(() -> gui.actionPerformed(gui.field_146321_E), this::areCheatsEnabled, value);
     }
 
-    public void setEnableCreativeMode(MutableTrilean value) {
-        if(value.get() != Trilean.UNSET) {
-            boolean newVal = value.isTrue();
-            while(!(newVal ? isCreativeMode() : getGamemodeName().equals(defaultGamemode))) {
-                gui.actionPerformed(gui.field_146343_z);
-            }
+    public boolean setGamemode(String value) {
+        return tryToSetValue(() -> gui.actionPerformed(gui.field_146343_z), this::getGamemodeName, value);
+    }
+    
+    private boolean tryToSetValue(Runnable stepFunction, Supplier<Object> getValue, Object target) {
+        Object value = getValue.get();
+        Object firstValue = value;
+        int steps = 0;
+        final int MAX_STEPS = 100;
+        while(!value.equals(target) && !(steps > 0 && value.equals(firstValue)) && steps < MAX_STEPS) {
+            stepFunction.run();
+            value = getValue.get();
+            steps++;
         }
+        if(!value.equals(target)) {
+            // restore original value
+            while(!value.equals(firstValue) && steps < MAX_STEPS) {
+                stepFunction.run();
+                value = getValue.get();
+                steps++;
+            }
+        } else {
+            return true;
+        }
+        return false;
     }
     
 }

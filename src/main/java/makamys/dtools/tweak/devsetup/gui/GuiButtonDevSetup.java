@@ -2,15 +2,17 @@ package makamys.dtools.tweak.devsetup.gui;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.IntStream;
 
 import org.lwjgl.input.Keyboard;
 
 import makamys.dtools.tweak.devsetup.DevWorldSetup;
-import makamys.dtools.tweak.devsetup.DevWorldSetup.MutableTrilean;
+import makamys.dtools.tweak.devsetup.DevWorldSetup.Config.ConfigItem;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiCreateWorld;
 import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.world.WorldType;
 
 public class GuiButtonDevSetup extends GuiButtonGeneric {
 
@@ -19,6 +21,11 @@ public class GuiButtonDevSetup extends GuiButtonGeneric {
     private GuiCreateWorldManipulator guiManipulator;
     
     boolean firstClick = true;
+    private String defaultGamemode;
+    private int defaultWorldTypeIndex;
+    private boolean defaultEnableCheats;
+    private boolean defaultEnableStructures;
+    private int superflatWorldTypeIndex;
     
     public GuiButtonDevSetup(int id, int posX, int posY, int width, int height, GuiCreateWorld createWorld, GuiButton worldTypeButton) {
         super(id, posX, posY, width, height, "Dev");
@@ -44,16 +51,19 @@ public class GuiButtonDevSetup extends GuiButtonGeneric {
         return tooltip;
     }
     
-    private String generateSettingDescription(String description, MutableTrilean enabled, String enabledColor, String disabledColor) {
-        return (enabled.isTrue() ? enabledColor : disabledColor) + (enabled.isTrue() ? "+" : "-") + " " + description;
+    private String generateSettingDescription(String description, ConfigItem item, String enabledColor, String disabledColor) {
+        return (item.isEffectivelyEnabled() ? enabledColor : disabledColor) + (item.isEffectivelyEnabled() ? "+" : "-") + " " + description;
     }
 
     @Override
     public void onClicked() {
         if(firstClick) {
             firstClick = false;
-            guiManipulator.defaultWorldType = guiManipulator.getWorldTypeIndex();
-            guiManipulator.defaultGamemode = guiManipulator.getGamemodeName();
+            defaultWorldTypeIndex = guiManipulator.getWorldTypeIndex();
+            superflatWorldTypeIndex = IntStream.range(0, WorldType.worldTypes.length).filter(i -> WorldType.worldTypes[i] == WorldType.FLAT).findFirst().getAsInt();
+            defaultGamemode = guiManipulator.getGamemodeName();
+            defaultEnableCheats = guiManipulator.areCheatsEnabled();
+            defaultEnableStructures = guiManipulator.areStructuresEnabled();
         }
         config.toggle(Keyboard.isKeyDown(Keyboard.KEY_LSHIFT));
         applyConfig(config);
@@ -75,10 +85,18 @@ public class GuiButtonDevSetup extends GuiButtonGeneric {
     }
     
     private void applyConfig(DevWorldSetup.Config config) {
-        guiManipulator.setEnableCreativeMode(config.setGamemodeCreative);
-        guiManipulator.setEnableCheats(config.enableCheats);
-        guiManipulator.setDisableStructures(config.disableStructures);
-        guiManipulator.setSuperflat(config.superflat);
+        if(!guiManipulator.setGamemode(config.setGamemodeCreative.isEnabled() ? "creative" : defaultGamemode)) {
+            config.setGamemodeCreative.setSynced(false);
+        }
+        if(!guiManipulator.setEnableCheats(config.enableCheats.isEnabled() ? true : defaultEnableCheats)) {
+            config.enableCheats.setSynced(false);
+        }
+        if(!guiManipulator.setEnableStructures(config.disableStructures.isEnabled() ? false : defaultEnableStructures)) {
+            config.disableStructures.setSynced(false);
+        }
+        if(!guiManipulator.setWorldTypeIndex(config.superflat.isEnabled() ? superflatWorldTypeIndex : defaultWorldTypeIndex)) {
+            config.superflat.setSynced(false);
+        }
     }
 
     private void updateConfig() {
