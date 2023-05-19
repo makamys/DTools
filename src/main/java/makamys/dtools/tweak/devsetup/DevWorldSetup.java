@@ -63,24 +63,14 @@ public class DevWorldSetup implements IFMLEventListener {
         }
         
         private void setType(int type) {
-            setValue(setGamemodeCreative, type >= 1);
-            setValue(enableCheats, type >= 1);
-            setValue(disableDoDaylightCycle, type >= 1);
-            setValue(disableDoWeatherCycle, type >= 1);
+            setGamemodeCreative.setValue(type >= 1);
+            enableCheats.setValue(type >= 1);
+            disableDoDaylightCycle.setValue(type >= 1);
+            disableDoWeatherCycle.setValue(type >= 1);
             
-            setValue(disableDoMobSpawning, type >= 2);
-            setValue(disableStructures, type >= 2);
-            setValue(superflat, type >= 2);
-        }
-        
-        @Deprecated
-        private void setValue(ConfigItem item, boolean value) {
-            item.setValue(value);
-        }
-        
-        @Deprecated
-        public void update(ConfigItem item, boolean value) {
-            item.update(value);
+            disableDoMobSpawning.setValue(type >= 2);
+            disableStructures.setValue(type >= 2);
+            superflat.setValue(type >= 2);
         }
         
         public static class ConfigItem {

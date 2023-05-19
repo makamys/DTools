@@ -100,10 +100,10 @@ public class GuiButtonDevSetup extends GuiButtonGeneric {
     }
 
     private void updateConfig() {
-        config.update(config.setGamemodeCreative, guiManipulator.isCreativeMode());
-        config.update(config.enableCheats, guiManipulator.areCheatsEnabled());
-        config.update(config.disableStructures, !guiManipulator.areStructuresEnabled());
-        config.update(config.superflat, guiManipulator.isSuperflat());
+        config.setGamemodeCreative.update(guiManipulator.isCreativeMode());
+        config.enableCheats.update(guiManipulator.areCheatsEnabled());
+        config.disableStructures.update(!guiManipulator.areStructuresEnabled());
+        config.superflat.update(guiManipulator.isSuperflat());
     }
 
 }
