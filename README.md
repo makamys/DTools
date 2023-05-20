@@ -19,6 +19,7 @@ The mod was formerly part of [CoreTweaks](https://github.com/makamys/CoreTweaks)
 * Backports of sprint flying and `doWeatherCycle` (from Et Futurum Requiem)
 * A simple F3+F4 gamemode switcher
 * A one-button "dev world primer" that automatically sets [stuff like `doDaylightCycle false`](src/main/resources/assets/dtools/default_config/dtools/devsetup.ini).
+* A keyboard shortcut to delete worlds, or just their region files, from the world selection GUI
 * See the [Config](https://github.com/makamys/DTools/wiki/Config) page on the wiki for the full list.
 
 ## Usage
