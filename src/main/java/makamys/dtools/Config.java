@@ -69,12 +69,18 @@ public class Config {
     public static boolean unlockAllAspects;
     
     private static Configuration config;
-    private static File configFile = new File(Launch.minecraftHome, "config/" + MODID + ".cfg");
+    private static File oldConfigFile = new File(Launch.minecraftHome, "config/" + MODID + ".cfg");
+    private static File configFile = new File(Launch.minecraftHome, "config/" + MODID + "/" + MODID + ".cfg");
     
     private static AnnotationBasedConfigHelper configHelper = new AnnotationBasedConfigHelper(Config.class, LOGGER);
 
     
     public static void reload() {
+        if(oldConfigFile.isFile() && !configFile.isFile()) {
+            LOGGER.info("Migrating config from " + oldConfigFile + " to " + configFile);
+            oldConfigFile.renameTo(configFile);
+        }
+        
         config = new Configuration(configFile);
         
         config.load();
