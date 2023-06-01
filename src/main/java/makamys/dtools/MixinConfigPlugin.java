@@ -69,6 +69,9 @@ public class MixinConfigPlugin implements IMixinConfigPlugin {
                     "diagnostics.wrongmixin.MixinGuiAchievements",
                     "diagnostics.wrongmixin.MixinGuiTextField"
             ));
+            if(Config.setBlockProfiler) mixins.addAll(Arrays.asList(
+                    "diagnostics.setblockprofiler.MixinWorld")
+            );
             if(Config.logScreenshotPosition) mixins.add("diagnostics.wherewasi.MixinScreenshotHelper");
             if(Compat.isThaumcraftPresent() && Config.unlockAllAspects) mixins.addAll(Arrays.asList(
                     "tweak.thaumcraft.unlockallaspects.MixinClientTickEventsFML",

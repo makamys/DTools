@@ -28,6 +28,7 @@ import makamys.dtools.diagnostics.FrameProfiler;
 import makamys.dtools.diagnostics.MethodProfiler;
 import makamys.dtools.diagnostics.PositionDeltaPrinter;
 import makamys.dtools.diagnostics.ServerRunTimePrinter;
+import makamys.dtools.diagnostics.SetBlockProfiler;
 import makamys.dtools.diagnostics.WAIAA;
 import makamys.dtools.diagnostics.Wireframe;
 import makamys.dtools.diagnostics.thaumcraft.ThaumcraftTools;
@@ -85,6 +86,9 @@ public class DToolsMod
             }
             if(Config.gamemodeSwitcher && !Compat.isEtFuturumRequiemPresent()) {
                 registerListener(GamemodeSwitcher.instance = new GamemodeSwitcher());
+            }
+            if(Config.setBlockProfiler) {
+                registerListener(SetBlockProfiler.instance = new SetBlockProfiler());
             }
         }
     }
