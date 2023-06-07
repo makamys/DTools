@@ -17,7 +17,7 @@ public class Util {
         if(sharedDataDir == null) {
             sharedDataDir = System.getenv("MINECRAFT_SHARED_DATA_DIR");
         }
-        return new File(sharedDataDir);
+        return sharedDataDir == null ? null : new File(sharedDataDir);
     }
     
 }

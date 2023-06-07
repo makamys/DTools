@@ -63,9 +63,9 @@ public class ConfigReader {
     private static List<String> readConfig(){
         String relPath = "config/" + MODID + "/devsetup.ini";
         File instanceFile = new File(Launch.minecraftHome, relPath);
-        File sharedFile = new File(Util.getSharedDataDir(), relPath);
+        File sharedFile = Util.getSharedDataDir() == null ? null : new File(Util.getSharedDataDir(), relPath);
         
-        File configFile = sharedFile.isFile() ? sharedFile : instanceFile;
+        File configFile = sharedFile != null && sharedFile.isFile() ? sharedFile : instanceFile;
         
         configFile.getParentFile().mkdirs();
         
