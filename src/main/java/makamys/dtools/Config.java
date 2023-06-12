@@ -67,6 +67,8 @@ public class Config {
     public static boolean gamemodeSwitcher;
     @ConfigBoolean(cat="Tweaks", def=false, com="Adds keyboard combinations to quickly delete worlds: Pressing Alt+D in the world selection GUI will delete only the world region data, Shift+D will delete the world completely forever (a long time!)")
     public static boolean worldDeleter;
+    @ConfigBoolean(cat="Tweaks", def=false, com="Force skins to get reloaded when relogging.")
+    public static boolean forceReloadSkins;
     @ConfigBoolean(cat="Tweaks.thaumcraft", def=true, com="Show aspects for all items without having to scan them if player is in creative mode.")
     public static boolean unlockAllAspects;
     

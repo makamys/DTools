@@ -34,6 +34,7 @@ import makamys.dtools.diagnostics.Wireframe;
 import makamys.dtools.diagnostics.thaumcraft.ThaumcraftTools;
 import makamys.dtools.listener.IFMLEventListener;
 import makamys.dtools.tweak.GamemodeSwitcher;
+import makamys.dtools.tweak.SkinReloader;
 import makamys.dtools.tweak.automation.AutoWorldLoad;
 import makamys.dtools.tweak.crashhandler.Crasher;
 import makamys.dtools.tweak.devsetup.DevWorldSetup;
@@ -89,6 +90,9 @@ public class DToolsMod
             }
             if(Config.setBlockProfiler) {
                 registerListener(SetBlockProfiler.instance = new SetBlockProfiler());
+            }
+            if(Config.forceReloadSkins) {
+                registerListener(SkinReloader.instance = new SkinReloader());
             }
         }
     }
