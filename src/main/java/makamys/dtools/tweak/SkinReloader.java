@@ -33,12 +33,10 @@ public class SkinReloader implements IFMLEventListener {
 
         while(it.hasNext()) {
             Entry<ResourceLocation, ITextureObject> e = it.next();
-           ResourceLocation resLoc = (ResourceLocation)e.getKey();
-           if (resLoc.getResourceDomain().equals("minecraft") && resLoc.getResourcePath().startsWith("skins/")) {
-              it.remove();
-           }
+            ResourceLocation resLoc = (ResourceLocation)e.getKey();
+            if (resLoc.getResourceDomain().equals("minecraft") && resLoc.getResourcePath().startsWith("skins/")) {
+                it.remove();
+            }
         }
-
     }
-    
 }
