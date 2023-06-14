@@ -35,6 +35,7 @@ import makamys.dtools.diagnostics.thaumcraft.ThaumcraftTools;
 import makamys.dtools.listener.IFMLEventListener;
 import makamys.dtools.tweak.GamemodeSwitcher;
 import makamys.dtools.tweak.SkinReloader;
+import makamys.dtools.tweak.automation.AutoChunkPregenGui;
 import makamys.dtools.tweak.automation.AutoWorldLoad;
 import makamys.dtools.tweak.crashhandler.Crasher;
 import makamys.dtools.tweak.devsetup.DevWorldSetup;
@@ -93,6 +94,9 @@ public class DToolsMod
             }
             if(Config.forceReloadSkins) {
                 registerListener(SkinReloader.instance = new SkinReloader());
+            }
+            if(Config.autoInitializeChunkPregenGui) {
+                registerListener(AutoChunkPregenGui.instance = new AutoChunkPregenGui());
             }
         }
     }

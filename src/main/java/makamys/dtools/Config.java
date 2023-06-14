@@ -41,6 +41,8 @@ public class Config {
     public static int autoLoadPauseWaitLength;
     @ConfigBoolean(cat="Automation", def=false, com="Press F to freeze input.\n(Cheat feature)")
     public static boolean freezeInputKey;
+    @ConfigBoolean(cat="Automation.chunkPregenerator", def=false, com="Auto-initialize Chunk Pregenerator GUI fields. This can be customized in `auto_chunk_pregen.ini`.")
+    public static boolean autoInitializeChunkPregenGui;
     
     @ConfigBoolean(cat="Debug", def=false, com="Enables debug feature that crashes the game when pressing certain key combinations.")
     public static boolean crasher;
