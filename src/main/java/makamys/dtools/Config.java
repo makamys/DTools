@@ -58,6 +58,8 @@ public class Config {
     public static boolean dumpSpawnTables;
     @ConfigBoolean(cat="Debug", def=false, com="Writes the camera coordinates and world seed of each screenshot into `.minecraft/dtools/wherewasi/<world_name>.hjson`")
     public static boolean logScreenshotPosition;
+    @ConfigBoolean(cat="Debug", def=false, com="Creates an OpenGL debug context and logs debug messages. May reduce performance.")
+    public static boolean logGlDebug;
     
     @ConfigBoolean(cat="Tweaks", def=true, com="Increase fly speed while sprinting. From Et Futurum Requiem.\nCompatibility note: Will be disabled if Et Futurum Requiem is present.")
     public static boolean sprintFlying;

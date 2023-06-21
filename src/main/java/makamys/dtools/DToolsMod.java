@@ -25,6 +25,7 @@ import makamys.dtools.diagnostics.DumpSpawnTables;
 import makamys.dtools.diagnostics.ExtraRAMInfo;
 import makamys.dtools.diagnostics.FMLProxyPacketCrasher;
 import makamys.dtools.diagnostics.FrameProfiler;
+import makamys.dtools.diagnostics.GLDebugLogger;
 import makamys.dtools.diagnostics.MethodProfiler;
 import makamys.dtools.diagnostics.PositionDeltaPrinter;
 import makamys.dtools.diagnostics.ServerRunTimePrinter;
@@ -97,6 +98,9 @@ public class DToolsMod
             }
             if(Config.autoInitializeChunkPregenGui) {
                 registerListener(AutoChunkPregenGui.instance = new AutoChunkPregenGui());
+            }
+            if(Config.logGlDebug) {
+                registerListener(GLDebugLogger.instance = new GLDebugLogger());
             }
         }
     }

@@ -88,6 +88,9 @@ public class MixinConfigPlugin implements IMixinConfigPlugin {
             if(Config.worldDeleter) mixins.addAll(Arrays.asList(
                     "tweak.worlddeleter.MixinGuiSelectWorld")
             );
+            if(Config.logGlDebug) mixins.addAll(Arrays.asList(
+                    "diagnostics.gldebug.MixinForgeHooksClient")
+            );
         }
         return mixins;
     }
