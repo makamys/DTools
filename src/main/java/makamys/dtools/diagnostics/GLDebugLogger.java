@@ -254,7 +254,7 @@ public class GLDebugLogger implements IFMLEventListener {
         for(int i = 0; i < stes.length; i++) {
             StackTraceElement ste = stes[i];
             if(!ste.getClassName().equals(GLDebugLogger.class.getName())) {
-                trace += ste.getClassName() + "." + ste.getMethodName() + (i < stes.length - 1 ? " < " : "");
+                trace += ste.getClassName() + "." + ste.getMethodName() + ":" + ste.getLineNumber() + (i < stes.length - 1 ? " < " : "");
             }
         }
         return trace;
