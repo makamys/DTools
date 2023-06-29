@@ -108,7 +108,7 @@ public class GLDebugLogger implements IFMLEventListener {
             renderDebugText = false;
             RenderGameOverlayEvent.Text text = (RenderGameOverlayEvent.Text) event;
             text.right.add(null);
-            text.right.add(EnumChatFormatting.AQUA + "" + totalMsgCount + " GL debug messages");
+            text.right.add(EnumChatFormatting.AQUA + "" + totalMsgCount + " GL debug message" + (totalMsgCount == 1 ? "" : "s"));
         }
     }
     
