@@ -6,6 +6,8 @@ import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -16,11 +18,15 @@ import org.lwjgl.opengl.KHRDebugCallback;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.gameevent.TickEvent;
 import cpw.mods.fml.common.network.FMLNetworkEvent.ClientConnectedToServerEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import lombok.Data;
+import lombok.RequiredArgsConstructor;
 import makamys.dtools.listener.IFMLEventListener;
 import makamys.dtools.util.BufferUtil;
+import net.minecraft.client.Minecraft;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.common.MinecraftForge;
@@ -58,6 +64,15 @@ public class GLDebugLogger implements IFMLEventListener {
     
     public static final Logger LOGGER = LogManager.getLogger(MODID + "-gldebug");
     
+    private static BlockingQueue<QueuedMessage> queuedMessages = new LinkedBlockingQueue<>();
+    
+    @Data
+    @RequiredArgsConstructor
+    private static class QueuedMessage {
+        private final int source, type, id, severity;
+        private final String message;
+    }
+    
     private static boolean hasRegisteredCallback;
     private boolean renderDebugText = false;
     
@@ -76,6 +91,13 @@ public class GLDebugLogger implements IFMLEventListener {
     @SideOnly(Side.CLIENT)
     public void onConnectToServer(ClientConnectedToServerEvent event) {
         init();
+    }
+    
+    @SubscribeEvent
+    public void onRenderTick(TickEvent.RenderTickEvent event) {
+        for(QueuedMessage msg = queuedMessages.poll(); msg != null; msg = queuedMessages.poll()) {
+            printMessage(msg.source, msg.type, msg.id, msg.severity, msg.message, true);
+        }
     }
     
     @SubscribeEvent
@@ -123,6 +145,12 @@ public class GLDebugLogger implements IFMLEventListener {
     }
     
     static void printMessage(final int source, final int type, final int id, final int severity, String message, final boolean replay) {
+        if(!Minecraft.getMinecraft().func_152345_ab()) {
+            // If we're not on the main thread, logging doesn't work (idk why). Queue it up and replay it on the main thread instead.
+            queuedMessages.add(new QueuedMessage(source, type, id, severity, message));
+            return;
+        }
+        
         int count = msgCount.computeIfAbsent(message, (s) -> 0);
         
         if(!replay) {
