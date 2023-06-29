@@ -26,7 +26,7 @@ public class Config {
     public static String methodProfilerMethods;
     @ConfigBoolean(cat="Profiling", def=false, com="Creates a report of how long each step of startup loading took in ./dtools/out/fml_bar_profiler.csv.")
     public static boolean forgeBarProfiler;
-    @ConfigBoolean(cat="Profiling", def=false, com="Prints server run time.")
+    @ConfigBoolean(cat="Profiling", def=false, com="Prints server run time.\n\nYou can also set a shell command to be run when the server starts and stops by setting the `dtools.serverRunTimePrinter.startCommand` and `dtools.serverRunTimePrinter.stopCommand` JVM flags. Useful for attaching a profiler, for example.")
     public static boolean serverRunTimePrinter;
     @ConfigBoolean(cat="Profiling", def=false, com="Show extra RAM info in F3 overlay.")
     public static boolean extraRamInfo;
