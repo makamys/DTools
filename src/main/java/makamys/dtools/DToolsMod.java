@@ -40,6 +40,7 @@ import makamys.dtools.tweak.automation.AutoChunkPregenGui;
 import makamys.dtools.tweak.automation.AutoWorldLoad;
 import makamys.dtools.tweak.crashhandler.Crasher;
 import makamys.dtools.tweak.devsetup.DevWorldSetup;
+import makamys.dtools.tweak.doweathercycle.DoWeatherCycle;
 import makamys.dtools.util.KeyboardUtil;
 import makamys.mclib.core.MCLib;
 import makamys.mclib.core.MCLibModules;
@@ -63,6 +64,9 @@ public class DToolsMod
         }
         if(Config.dumpSpawnTables) {
             registerListener(DumpSpawnTables.instance = new DumpSpawnTables());
+        }
+        if(Config.doWeatherCycle) {
+            registerListener(DoWeatherCycle.instance = new DoWeatherCycle());
         }
         if(event.getSide() == Side.CLIENT) {
             registerListener(FrameProfiler.instance = new FrameProfiler());

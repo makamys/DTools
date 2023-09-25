@@ -5,7 +5,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import makamys.dtools.tweak.DoWeatherCycleHelper;
+import makamys.dtools.tweak.doweathercycle.DoWeatherCycleHelper;
 import net.minecraft.world.storage.WorldInfo;
 
 @Mixin(WorldInfo.class)

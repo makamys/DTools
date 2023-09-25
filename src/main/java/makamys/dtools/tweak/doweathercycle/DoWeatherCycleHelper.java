@@ -1,4 +1,4 @@
-package makamys.dtools.tweak;
+package makamys.dtools.tweak.doweathercycle;
 
 import net.minecraft.world.GameRules;
 
