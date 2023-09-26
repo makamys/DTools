@@ -60,6 +60,10 @@ public class Config {
     public static boolean logScreenshotPosition;
     @ConfigBoolean(cat="Debug", def=false, com="Creates an OpenGL debug context and logs debug messages. May reduce performance.")
     public static boolean logGlDebug;
+    @ConfigBoolean(cat="Debug", def=true, com="Hide hand and hotbar while the F3 overlay is active. If Sampler is present, a black background will also be drawn behind its frametime graph. Toggle using /dtools hudlessF3")
+    public static boolean hudlessF3;
+    @ConfigBoolean(cat="Debug", def=true, com="Whether hudlessF3 should be active at startup.")
+    public static boolean hudlessF3StartEnabled;
     
     @ConfigBoolean(cat="Tweaks", def=true, com="Increase fly speed while sprinting. From Et Futurum Requiem.\nCompatibility note: Will be disabled if Et Futurum Requiem is present.")
     public static boolean sprintFlying;

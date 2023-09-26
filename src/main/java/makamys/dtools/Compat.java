@@ -5,6 +5,8 @@ import cpw.mods.fml.common.ModContainer;
 
 public class Compat {
 
+    private static Boolean isSamplerPresent;
+    
     public static boolean isNHEIPresent() {
         ModContainer mc = Loader.instance().getIndexedModList().get("NotEnoughItems");
         return mc != null && mc.getVersion().contains("-GTNH");
@@ -16,6 +18,13 @@ public class Compat {
     
     public static boolean isEtFuturumRequiemPresent() {
         return isClassPresent("ganymedes01.etfuturum.EtFuturum");
+    }
+    
+    public static boolean isSamplerPresent() {
+        if(isSamplerPresent == null) {
+            isSamplerPresent = Loader.isModLoaded("sampler");
+        }
+        return isSamplerPresent;
     }
 
     private static boolean isClassPresent(String className) {

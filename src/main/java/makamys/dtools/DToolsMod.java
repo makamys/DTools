@@ -35,6 +35,7 @@ import makamys.dtools.diagnostics.Wireframe;
 import makamys.dtools.diagnostics.thaumcraft.ThaumcraftTools;
 import makamys.dtools.listener.IFMLEventListener;
 import makamys.dtools.tweak.GamemodeSwitcher;
+import makamys.dtools.tweak.HudlessF3;
 import makamys.dtools.tweak.SkinReloader;
 import makamys.dtools.tweak.automation.AutoChunkPregenGui;
 import makamys.dtools.tweak.automation.AutoWorldLoad;
@@ -105,6 +106,9 @@ public class DToolsMod
             }
             if(Config.logGlDebug) {
                 registerListener(GLDebugLogger.instance = new GLDebugLogger());
+            }
+            if(Config.hudlessF3) {
+                registerListener(HudlessF3.instance = new HudlessF3());
             }
         }
     }
