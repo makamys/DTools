@@ -28,7 +28,7 @@ public class Config {
     public static boolean forgeBarProfiler;
     @ConfigBoolean(cat="Profiling", def=false, com="Prints server run time.\n\nYou can also set a shell command to be run when the server starts and stops by setting the `dtools.serverRunTimePrinter.startCommand` and `dtools.serverRunTimePrinter.stopCommand` JVM flags. Useful for attaching a profiler, for example.")
     public static boolean serverRunTimePrinter;
-    @ConfigBoolean(cat="Profiling", def=false, com="Show extra RAM info in F3 overlay.")
+    @ConfigBoolean(cat="Profiling", def=false, com="Show RAM allocation rate in F3 overlay.")
     public static boolean extraRamInfo;
     @ConfigBoolean(cat="Profiling", def=false, com="Logs how many times World#setBlock was called, with breakdowns by caller and block type. The results are written to ./dtools/out/setblockprofiler.txt. Slows down world gen by a lot!")
     public static boolean setBlockProfiler;
@@ -62,7 +62,7 @@ public class Config {
     public static boolean logGlDebug;
     @ConfigBoolean(cat="Debug", def=true, com="Hide hand and hotbar while the F3 overlay is active. If Sampler is present, a black background will also be drawn behind its frametime graph. Toggle using /dtools hudlessF3")
     public static boolean hudlessF3;
-    @ConfigBoolean(cat="Debug", def=true, com="Whether hudlessF3 should be active at startup.")
+    @ConfigBoolean(cat="Debug", def=false, com="Whether hudlessF3 should be active at startup.")
     public static boolean hudlessF3StartEnabled;
     
     @ConfigBoolean(cat="Tweaks", def=true, com="Increase fly speed while sprinting. From Et Futurum Requiem.\nCompatibility note: Will be disabled if Et Futurum Requiem is present.")
