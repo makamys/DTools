@@ -20,6 +20,10 @@ public class Compat {
         return isClassPresent("ganymedes01.etfuturum.EtFuturum");
     }
     
+    public static boolean isArchaicFixPresent() {
+        return isClassPresent("org.embeddedt.archaicfix.ArchaicFix");
+    }
+    
     public static boolean isSamplerPresent() {
         if(isSamplerPresent == null) {
             isSamplerPresent = Loader.isModLoaded("sampler");

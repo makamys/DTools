@@ -32,6 +32,8 @@ public class Config {
     public static boolean extraRamInfo;
     @ConfigBoolean(cat="Profiling", def=false, com="Logs how many times World#setBlock was called, with breakdowns by caller and block type. The results are written to ./dtools/out/setblockprofiler.txt. Slows down world gen by a lot!")
     public static boolean setBlockProfiler;
+    @ConfigBoolean(cat="Profiling", def=false, com="Prints how long startup took once the main menu is reached.\nCompatibility note: Will be disabled if ArchaicFix is present, which has the same feature.")
+    public static boolean printStartupTime;
     
     @ConfigBoolean(cat="Automation", def=true, com="Pause some ticks after auto-loaded world is loaded.\nDelaying the pausing can be useful because some initialization like chunk updates won't happen while the game is paused.")
     public static boolean autoLoadPauseOnWorldEntry;
@@ -65,13 +67,13 @@ public class Config {
     @ConfigBoolean(cat="Debug", def=false, com="Whether hudlessF3 should be active at startup.")
     public static boolean hudlessF3StartEnabled;
     
-    @ConfigBoolean(cat="Tweaks", def=true, com="Increase fly speed while sprinting. From Et Futurum Requiem.\nCompatibility note: Will be disabled if Et Futurum Requiem is present.")
+    @ConfigBoolean(cat="Tweaks", def=true, com="Increase fly speed while sprinting. From Et Futurum Requiem.\nCompatibility note: Will be disabled if Et Futurum Requiem is present, which has the same feature.")
     public static boolean sprintFlying;
-    @ConfigBoolean(cat="Tweaks", def=true, com="Backports the doWeatherCycle game rule. From Et Futurum Requiem.\nCompatibility note: Will be disabled if Et Futurum Requiem is present.")
+    @ConfigBoolean(cat="Tweaks", def=true, com="Backports the doWeatherCycle game rule. From Et Futurum Requiem.\nCompatibility note: Will be disabled if Et Futurum Requiem is present, which has the same feature.")
     public static boolean doWeatherCycle;
     @ConfigBoolean(cat="Tweaks", def=true, com="Adds a button to the world creation GUI for convenient setup of test worlds. This can be customized in `devsetup.ini`.")
     public static boolean devWorldSetup;
-    @ConfigBoolean(cat="Tweaks", def=true, com="Switch gamemode between survival and creative when pressing F3+F4.\nCompatibility note: Will be disabled if Et Futurum Requiem is present.")
+    @ConfigBoolean(cat="Tweaks", def=true, com="Switch gamemode between survival and creative when pressing F3+F4.\nCompatibility note: Will be disabled if Et Futurum Requiem is present, which has the same feature.")
     public static boolean gamemodeSwitcher;
     @ConfigBoolean(cat="Tweaks", def=false, com="Adds keyboard combinations to quickly delete worlds: Pressing Alt+D in the world selection GUI will delete only the world region data, Shift+D will delete the world completely forever (a long time!)")
     public static boolean worldDeleter;
