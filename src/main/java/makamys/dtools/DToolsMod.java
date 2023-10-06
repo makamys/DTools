@@ -40,6 +40,7 @@ import makamys.dtools.tweak.HudlessF3;
 import makamys.dtools.tweak.SkinReloader;
 import makamys.dtools.tweak.automation.AutoChunkPregenGui;
 import makamys.dtools.tweak.automation.AutoWorldLoad;
+import makamys.dtools.tweak.automation.CommandRunner;
 import makamys.dtools.tweak.crashhandler.Crasher;
 import makamys.dtools.tweak.devsetup.DevWorldSetup;
 import makamys.dtools.tweak.doweathercycle.DoWeatherCycle;
@@ -74,6 +75,9 @@ public class DToolsMod
             registerListener(FrameProfiler.instance = new FrameProfiler());
             if(JVMArgs.LAUNCH_WORLD != null) {
             	registerListener(AutoWorldLoad.instance = new AutoWorldLoad());
+            }
+            if(JVMArgs.RUN_COMMAND_MAIN_MENU != null) {
+                registerListener(CommandRunner.instance = new CommandRunner());
             }
             if(Config.wireframe) {
                 registerListener(Wireframe.instance = new Wireframe());
