@@ -2,6 +2,7 @@ package makamys.dtools.tweak.automation;
 
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
+import cpw.mods.fml.common.eventhandler.EventPriority;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -25,7 +26,7 @@ public class CommandRunner implements IFMLEventListener {
     }
     
     @SideOnly(Side.CLIENT)
-    @SubscribeEvent
+    @SubscribeEvent(priority = EventPriority.LOWEST)
     public void onGuiOpen(GuiOpenEvent event) {
         if(event.gui != null && event.gui instanceof GuiMainMenu && !seenMainMenu) {
             seenMainMenu = true;
