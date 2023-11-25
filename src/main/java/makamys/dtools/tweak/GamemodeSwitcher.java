@@ -25,12 +25,13 @@ public class GamemodeSwitcher implements IFMLEventListener {
     public void onClientTick(ClientTickEvent event) {
         if(mc.currentScreen == null) {
             boolean isF4Pressed = Keyboard.isKeyDown(Keyboard.KEY_F4);
-            if(mc.gameSettings.showDebugInfo && isF4Pressed && !wasF4Pressed) {
+            if(Keyboard.isKeyDown(Keyboard.KEY_F3) && isF4Pressed && !wasF4Pressed) {
                 boolean creative = mc.thePlayer.capabilities.isCreativeMode;
                 String newGamemode = creative ? "survival" : "creative";
                 mc.thePlayer.sendChatMessage("/gamemode " + newGamemode);
                 Minecraft.getMinecraft().gameSettings.showDebugInfo = false;
             }
+            wasF4Pressed = isF4Pressed;
         }
     }
 }
