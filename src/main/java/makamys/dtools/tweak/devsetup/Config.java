@@ -163,21 +163,25 @@ public class Config {
     @RequiredArgsConstructor
     public static class GameruleCommand implements IConfigCommand {        
         public final String gamerule;
-        public final boolean enable;
+        public final String value;
         
         public static GameruleCommand fromWords(String[] words) {
             Preconditions.checkArgument(words.length == 3);
-            return new GameruleCommand(words[1], Boolean.parseBoolean(words[2]));
+            return new GameruleCommand(words[1], words[2]);
         }
 
         @Override
         public void applyToServer(MinecraftServer server) {
-            server.worldServerForDimension(0).getGameRules().setOrCreateGameRule(gamerule, enable ? "true" : "false");
+            server.worldServerForDimension(0).getGameRules().setOrCreateGameRule(gamerule, value);
         }
 
         @Override
         public String getDescription() {
-            return (enable ? "Enable" : "Disable") + " " + gamerule;
+            if(value.equals("true") || value.equals("false")) {
+                return (value.equals("true") ? "Enable" : "Disable") + " " + gamerule;
+            } else {
+                return "Set " + gamerule + " to " + value;
+            }
         }        
     }
     
