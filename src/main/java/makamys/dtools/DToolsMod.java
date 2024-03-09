@@ -69,10 +69,10 @@ public class DToolsMod
         if(Config.dumpSpawnTables) {
             registerListener(DumpSpawnTables.instance = new DumpSpawnTables());
         }
-        if(Config.doWeatherCycle) {
+        if(Config.doWeatherCycle && !Compat.isEtFuturumFeaturePresent(Compat.EtFuturumFeature.DO_WEATHER_CYCLE)) {
             registerListener(DoWeatherCycle.instance = new DoWeatherCycle());
         }
-        if(Config.randomTickSpeed) {
+        if(Config.randomTickSpeed && !Compat.isEtFuturumFeaturePresent(Compat.EtFuturumFeature.RANDOM_TICK_SPEED)) {
             registerListener(RandomTickSpeed.instance = new RandomTickSpeed());
         }
         if(event.getSide() == Side.CLIENT) {
@@ -101,7 +101,7 @@ public class DToolsMod
             if(Config.devWorldSetup) {
                 registerListener(DevWorldSetup.instance = new DevWorldSetup());
             }
-            if(Config.gamemodeSwitcher && !Compat.isEtFuturumRequiemPresent()) {
+            if(Config.gamemodeSwitcher && !Compat.isEtFuturumFeaturePresent(Compat.EtFuturumFeature.GAMEMODE_SWITCHER)) {
                 registerListener(GamemodeSwitcher.instance = new GamemodeSwitcher());
             }
             if(Config.setBlockProfiler) {

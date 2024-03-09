@@ -77,12 +77,12 @@ public class MixinConfigPlugin implements IMixinConfigPlugin {
                     "tweak.thaumcraft.unlockallaspects.MixinClientTickEventsFML",
                     "tweak.thaumcraft.unlockallaspects.MixinPlayerKnowledge"
             ));
-            if(!Compat.isEtFuturumRequiemPresent() && Config.sprintFlying) mixins.add("tweak.flyspeed.MixinEntityPlayer");
-            if(!Compat.isEtFuturumRequiemPresent() && Config.doWeatherCycle) mixins.addAll(Arrays.asList(
+            if(!Compat.isEtFuturumFeaturePresent(Compat.EtFuturumFeature.SPRINT_FLYING) && Config.sprintFlying) mixins.add("tweak.flyspeed.MixinEntityPlayer");
+            if(!Compat.isEtFuturumFeaturePresent(Compat.EtFuturumFeature.DO_WEATHER_CYCLE) && Config.doWeatherCycle) mixins.addAll(Arrays.asList(
                     "tweak.doweathercycle.MixinCommandHandler",
                     "tweak.doweathercycle.MixinWorldInfo")
             );
-            if(Config.randomTickSpeed) mixins.addAll(Arrays.asList(
+            if(!Compat.isEtFuturumFeaturePresent(Compat.EtFuturumFeature.RANDOM_TICK_SPEED) && Config.randomTickSpeed) mixins.addAll(Arrays.asList(
                     "tweak.randomtickspeed.MixinWorldServer")
             );
             if(Config.devWorldSetup) mixins.addAll(Arrays.asList(
