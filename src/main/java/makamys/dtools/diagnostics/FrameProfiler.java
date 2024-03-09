@@ -15,6 +15,7 @@ import makamys.dtools.command.DToolsCommand;
 import makamys.dtools.command.ISubCommand;
 import makamys.dtools.listener.IFMLEventListener;
 import makamys.dtools.listener.ILifeCycleListener;
+import makamys.dtools.util.JavaUtil;
 import makamys.dtools.util.TableBuilder;
 import makamys.dtools.util.Util;
 import net.minecraft.client.Minecraft;
@@ -51,7 +52,8 @@ public class FrameProfiler implements IFMLEventListener, ILifeCycleListener {
         t_syncEnd,
         t_gameLoopEnd,
         chunkUpdates,
-        gui
+        gui,
+        heap
     }
     
     public FrameProfiler() {
@@ -83,6 +85,7 @@ public class FrameProfiler implements IFMLEventListener, ILifeCycleListener {
         if(started) {
             addEntry(t_frameEnd);
             addEntry(chunkUpdates, WorldRenderer.chunksUpdated - chunksUpdatedAtFrameStart);
+            addEntry(heap, JavaUtil.getHeapUsage());
             
             if(!Config.frameProfilerHooks) {
                 tb.endRow();

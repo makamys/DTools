@@ -2,6 +2,7 @@ package makamys.dtools.diagnostics;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import makamys.dtools.listener.IFMLEventListener;
+import makamys.dtools.util.JavaUtil;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.common.MinecraftForge;
 
@@ -29,9 +30,7 @@ public class ExtraRAMInfo implements IFMLEventListener {
             RenderGameOverlayEvent.Text text = (RenderGameOverlayEvent.Text) event;
             text.right.add(null);
             
-            long total = Runtime.getRuntime().totalMemory();
-            long free = Runtime.getRuntime().freeMemory();
-            long used = total - free;
+            long used = JavaUtil.getHeapUsage();
             long now = System.nanoTime();
             
             long allocatedSinceLast = used - lastUsedRam;
