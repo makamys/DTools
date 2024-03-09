@@ -37,6 +37,7 @@ import makamys.dtools.diagnostics.thaumcraft.ThaumcraftTools;
 import makamys.dtools.listener.IFMLEventListener;
 import makamys.dtools.tweak.GamemodeSwitcher;
 import makamys.dtools.tweak.HudlessF3;
+import makamys.dtools.tweak.RandomTickSpeed;
 import makamys.dtools.tweak.SkinReloader;
 import makamys.dtools.tweak.automation.AutoChunkPregenGui;
 import makamys.dtools.tweak.automation.AutoWorldLoad;
@@ -70,6 +71,9 @@ public class DToolsMod
         }
         if(Config.doWeatherCycle) {
             registerListener(DoWeatherCycle.instance = new DoWeatherCycle());
+        }
+        if(Config.randomTickSpeed) {
+            registerListener(RandomTickSpeed.instance = new RandomTickSpeed());
         }
         if(event.getSide() == Side.CLIENT) {
             registerListener(FrameProfiler.instance = new FrameProfiler());

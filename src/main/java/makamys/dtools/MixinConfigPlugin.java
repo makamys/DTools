@@ -82,6 +82,9 @@ public class MixinConfigPlugin implements IMixinConfigPlugin {
                     "tweak.doweathercycle.MixinCommandHandler",
                     "tweak.doweathercycle.MixinWorldInfo")
             );
+            if(Config.randomTickSpeed) mixins.addAll(Arrays.asList(
+                    "tweak.randomtickspeed.MixinWorldServer")
+            );
             if(Config.devWorldSetup) mixins.addAll(Arrays.asList(
                     "tweak.devsetup.MixinGuiCreateWorld")
             );

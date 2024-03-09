@@ -71,6 +71,8 @@ public class Config {
     public static boolean sprintFlying;
     @ConfigBoolean(cat="Tweaks", def=true, com="Backports the doWeatherCycle game rule. From Et Futurum Requiem.\nCompatibility note: Will be disabled if Et Futurum Requiem is present, which has the same feature.")
     public static boolean doWeatherCycle;
+    @ConfigBoolean(cat="Tweaks", def=true, com="Backports the randomTickSpeed game rule.")
+    public static boolean randomTickSpeed;
     @ConfigBoolean(cat="Tweaks", def=true, com="Adds a button to the world creation GUI for convenient setup of test worlds. This can be customized in `devsetup.ini`.")
     public static boolean devWorldSetup;
     @ConfigBoolean(cat="Tweaks", def=true, com="Switch gamemode between survival and creative when pressing F3+F4.\nCompatibility note: Will be disabled if Et Futurum Requiem is present, which has the same feature.")
