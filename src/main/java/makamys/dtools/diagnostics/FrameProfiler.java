@@ -83,6 +83,10 @@ public class FrameProfiler implements IFMLEventListener, ILifeCycleListener {
         if(started) {
             addEntry(t_frameEnd);
             addEntry(chunkUpdates, WorldRenderer.chunksUpdated - chunksUpdatedAtFrameStart);
+            
+            if(!Config.frameProfilerHooks) {
+                tb.endRow();
+            }
         }
         
         if(Config.frameProfilerPrint) {
